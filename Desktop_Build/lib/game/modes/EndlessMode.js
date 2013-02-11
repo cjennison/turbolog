@@ -15,6 +15,7 @@ EndlessMode = ig.Game.extend({
 	// Load a font
 	font: new ig.Font( 'media/04b03.font.png' ),
 	player:null,
+	flames:null,
 	
 	init: function() {
 		// Initialize your game here; bind keys etc.
@@ -23,6 +24,7 @@ EndlessMode = ig.Game.extend({
          ig.input.bind(ig.KEY.RIGHT_ARROW, 'right');
          ig.input.bind(ig.KEY.UP_ARROW, 'up');
          ig.input.bind(ig.KEY.DOWN_ARROW, 'down');
+         ig.input.bind(ig.KEY.Z, 'shoot');
 		
 		
 		//Joystick
@@ -36,8 +38,9 @@ EndlessMode = ig.Game.extend({
 		
 		
 		//Init Entities
-		var player = this.spawnEntity(EntityPlayer, 40, ig.system.height/2);
-		
+		this.flames = this.spawnEntity(EntityFlames, 40, ig.system.height/2);
+		this.player = this.spawnEntity(EntityPlayer, 40, ig.system.height/2);
+
 		
 		
 	},

@@ -41,7 +41,7 @@ MyGame = ig.Game.extend({
 
 // Start the Game with 60fps, a resolution of 320x240, scaled
 // up by a factor of 2
-		var height = 240;
+		 var height = 240;
          var scale = window.innerHeight / height;
          var width = window.innerWidth / scale;
          

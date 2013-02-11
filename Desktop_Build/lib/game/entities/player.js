@@ -8,18 +8,18 @@ ig.module(
 .defines(function(){
 
 EntityPlayer = ig.Entity.extend({
-	size: {x:30, y:10},
+	size: {x:30, y:16},
 	
 	maxVel: {x:100, y:100},
 	friction: {x:100, y:100},
 	
-	acceleration: {x:50, y:50},
+	acceleration: {x:80, y:50},
 	
 	type: ig.Entity.TYPE.A, // Player friendly group
 	checkAgainst: ig.Entity.TYPE.B,
 	collides: ig.Entity.COLLIDES.PASSIVE,
 	
-	animSheet: new ig.AnimationSheet('media/characters/turbolog.png', 32, 14),
+	animSheet: new ig.AnimationSheet('media/characters/turbolog.png', 32, 16),
 	
 	
 	init:function(x, y, settings){
@@ -34,18 +34,27 @@ EntityPlayer = ig.Entity.extend({
 	update: function(){
 		this.parent();
 		
+		
+		var flame = ig.game.getEntitiesByType(EntityFlames)[0];
+				if(flame){
+					flame.pos.x = this.pos.x + 2;
+					flame.pos.y = this.pos.y + 2;
+				}
+		
 		if(Math.abs(this.vel.y) < 10){
 			this.currentAnim = this.anims.idle;
-
+			flame.currentAnim = flame.anims.idle;
 		}
 		
 		if(ig.input.state("down")){
 			this.vel.y = this.acceleration.y;
 			this.currentAnim = this.anims.down;
+			flame.currentAnim = flame.anims.down;
 		}
 		if(ig.input.state("up")){
 			this.vel.y = -this.acceleration.y;
 			this.currentAnim = this.anims.up;
+			flame.currentAnim = flame.anims.up;
 		}
 		if(ig.input.state("left")){
 			this.vel.x = -this.acceleration.x;
@@ -54,9 +63,85 @@ EntityPlayer = ig.Entity.extend({
 			this.vel.x = this.acceleration.x;
 		}
 		
+		
+		if(ig.input.pressed('shoot')){
+			ig.game.spawnEntity(EntityBullet, this.pos.x + this.size.x, this.pos.y + this.size.y/2 - 2);
+		}
 		//console.log(this.vel)
 	}
 
 });
+
+
+EntityFlames= ig.Entity.extend ({
+			
+			size: {x: 30, y: 14},
+			offset: {x:2, y: 2},
+			
+			type: ig.Entity.TYPE.NONE,
+			checkAgainst: ig.Entity.TYPE.NONE, //I hate baddies
+			collides: ig.Entity.COLLIDES.PASSIVE,
+			
+			animSheet: new ig.AnimationSheet('media/characters/flames.png', 32, 16),
+			
+			init: function(x,y,settings){
+				this.parent(x,y,settings);
+				this.setAnimations(0);
+				
+			},
+			
+			setAnimations: function(offset){
+				offset = offset * 3;
+				this.addAnim('idle', .1, [0,1,2,3,4]);
+				this.addAnim('up', .1, [5,6,7,8,9]);
+				this.addAnim('down', .1, [10,11,12,13,14]);
+				this.currentAnim = this.anims.idle;
+			},
+			
+	});
+	
+EntityBullet = ig.Entity.extend({
+			size: {x:7, y: 3},
+			animSheet: new ig.AnimationSheet('media/projectiles/fireboltanim.png', 10, 5),
+			maxVel: {x:200, y:0},
+			
+			//collisions
+			type: ig.Entity.TYPE.NONE,
+			checkAgainst: ig.Entity.TYPE.B, //I hate baddies
+			collides: ig.Entity.COLLIDES.PASSIVE,
+			
+			init: function(x,y,settings){
+				this.parent(x,y,settings);
+				this.setAnimations(0);
+				
+			},
+			
+			setAnimations: function(offset){
+				offset = offset * 3;
+				this.addAnim('move', .8, [0,1,2]);
+				this.currentAnim = this.anims.move;
+			},
+			
+			update: function (){
+				this.pos.x += 5;
+				if (this.pos.x > ig.game.screen.width + 20){
+					this.kill();
+				}
+			},
+			
+			kill: function(){
+				this.parent();
+				//ig.game.bulletsOnScreen--;
+			},
+			
+			//Did i hit one of those type B things?
+			check: function( other ){
+				console.log("LOL");
+				other.kill();
+				this.kill();
+			} 
+			
+		});
+
 
 });
