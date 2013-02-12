@@ -7,7 +7,8 @@ ig.module(
 	'plugins.touch-button',
 	'plugins.zmagic',
     'plugins.analog-stick',
-	'game.entities.player'
+	'game.entities.player',
+	'game.entities.ui.healthbar'
 )
 .defines(function(){
 
@@ -16,17 +17,19 @@ EndlessMode = ig.Game.extend({
 	font: new ig.Font( 'media/04b03.font.png' ),
 	player:null,
 	flames:null,
-	
+	healthbar:null,
+		
 	init: function() {
 		// Initialize your game here; bind keys etc.
-		//keys
-		 ig.input.bind(ig.KEY.LEFT_ARROW, 'left');
-         ig.input.bind(ig.KEY.RIGHT_ARROW, 'right');
-         ig.input.bind(ig.KEY.UP_ARROW, 'up');
-         ig.input.bind(ig.KEY.DOWN_ARROW, 'down');
-         ig.input.bind(ig.KEY.Z, 'shoot');
 		
+		//Keys
+		ig.input.bind(ig.KEY.LEFT_ARROW, 'left');
+        ig.input.bind(ig.KEY.RIGHT_ARROW, 'right');
+        ig.input.bind(ig.KEY.UP_ARROW, 'up');
+        ig.input.bind(ig.KEY.DOWN_ARROW, 'down');
+        ig.input.bind(ig.KEY.Z, 'shoot');
 		
+
 		//Joystick
 		var baseSize = 50;
    	    var stickSize = 20;
@@ -40,7 +43,7 @@ EndlessMode = ig.Game.extend({
 		//Init Entities
 		this.flames = this.spawnEntity(EntityFlames, 40, ig.system.height/2);
 		this.player = this.spawnEntity(EntityPlayer, 40, ig.system.height/2);
-
+		this.healthbar = this.spawnEntity(EntityHealthBar, 10, 10, {Unit:this.player});
 		
 		
 	},
@@ -49,7 +52,6 @@ EndlessMode = ig.Game.extend({
 		// Update all entities and backgroundMaps
 		this.parent();
 		
-		// Add your own, additional update code here
 	},
 	
 	draw: function() {
