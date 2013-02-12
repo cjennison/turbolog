@@ -8,7 +8,7 @@ ig.module(
 .defines(function(){
 
 EntityPlayer = ig.Entity.extend({
-	size: {x:60, y:30},
+	size: {x:42, y:22},
 	
 	maxVel: {x:100, y:100},
 	friction: {x:100, y:100},
@@ -19,14 +19,14 @@ EntityPlayer = ig.Entity.extend({
 	checkAgainst: ig.Entity.TYPE.B,
 	collides: ig.Entity.COLLIDES.PASSIVE,
 	
-	animSheet: new ig.AnimationSheet('media/characters/turbolog.png', 60, 30),
+	animSheet: new ig.AnimationSheet('media/characters/turbolog.png', 42, 22),
 	
 	
 	init:function(x, y, settings){
 		this.parent(x, y, settings);
 		this.addAnim('idle', 1, [0]);
 		this.addAnim('up', 1, [1]);
-		this.addAnim('down', 1, [2]);
+		this.addAnim('down', 1, [4]);
 		
 		this.gravityFactor = 0;
 	},

@@ -25,7 +25,7 @@ EntitySawBladey = ig.Entity.extend({
 		
 	update:function(){
 		this.parent();
-		this.vel.x = -60;
+		this.vel.x = -90;
 	},
 	
 	check:function(other){

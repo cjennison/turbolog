@@ -10,7 +10,8 @@ ig.module(
 	'game.entities.player',
 	'game.entities.ui.healthbar',
 	'game.entities.controllers.enemycontroller',
-	'game.entities.enemies.zones.islandzone.sawbladey'
+	'game.entities.enemies.zones.islandzone.sawbladey',
+	'game.entities.zones.islandzone'
 )
 .defines(function(){
 
@@ -43,6 +44,7 @@ EndlessMode = ig.Game.extend({
 		
 		
 		//Init Entities
+		this.spawnEntity(EntityIslandZone, 0, 0)
 		this.flames = this.spawnEntity(EntityFlames, 40, ig.system.height/2);
 		this.player = this.spawnEntity(EntityPlayer, 40, ig.system.height/2);
 		this.healthbar = this.spawnEntity(EntityHealthBar, 10, 10, {Unit:this.player});
