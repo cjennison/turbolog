@@ -9,7 +9,8 @@ ig.module(
     'plugins.analog-stick',
 	'game.entities.player',
 	'game.entities.ui.healthbar',
-	'game.entities.controllers.enemycontroller'
+	'game.entities.controllers.enemycontroller',
+	'game.entities.enemies.zones.islandzone.sawbladey'
 )
 .defines(function(){
 
