@@ -19,7 +19,7 @@ EntityPlayer = ig.Entity.extend({
 	checkAgainst: ig.Entity.TYPE.B,
 	collides: ig.Entity.COLLIDES.PASSIVE,
 	
-	animSheet: new ig.AnimationSheet('media/characters/turbolog.png', 32, 16),
+	animSheet: new ig.AnimationSheet('media/characters/turbolog.png', 60, 30),
 	
 	
 	init:function(x, y, settings){
