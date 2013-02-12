@@ -8,7 +8,7 @@ ig.module(
 .defines(function(){
 
 EntityPlayer = ig.Entity.extend({
-	size: {x:30, y:16},
+	size: {x:60, y:30},
 	
 	maxVel: {x:100, y:100},
 	friction: {x:100, y:100},

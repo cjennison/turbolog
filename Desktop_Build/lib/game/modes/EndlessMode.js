@@ -47,6 +47,8 @@ EndlessMode = ig.Game.extend({
 		this.player = this.spawnEntity(EntityPlayer, 40, ig.system.height/2);
 		this.healthbar = this.spawnEntity(EntityHealthBar, 10, 10, {Unit:this.player});
 		
+		this.spawnEntity(EntityEnemyController, 0, 0);
+		
 		
 	},
 	
