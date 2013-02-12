@@ -15,7 +15,7 @@ EntityPlayer = ig.Entity.extend({
 	
 	acceleration: {x:80, y:50},
 	
-	type: ig.Entity.TYPE.A, // Player friendly group
+	type: ig.Entity.TYPE.A, 
 	checkAgainst: ig.Entity.TYPE.B,
 	collides: ig.Entity.COLLIDES.PASSIVE,
 	
@@ -45,21 +45,22 @@ EntityPlayer = ig.Entity.extend({
 			this.currentAnim = this.anims.idle;
 			flame.currentAnim = flame.anims.idle;
 		}
-		this.checkInput();
+		
+		this.checkInput(flame);
 		this.checkLimits();
 
 	},
 	
-	checkInput:function(){
+	checkInput:function(flame){
 		if(ig.input.state("down")){
 			this.vel.y = this.acceleration.y;
 			this.currentAnim = this.anims.down;
-			flame.currentAnim = flame.anims.down;
+			if(flame){flame.currentAnim = flame.anims.down; };
 		}
 		if(ig.input.state("up")){
 			this.vel.y = -this.acceleration.y;
 			this.currentAnim = this.anims.up;
-			flame.currentAnim = flame.anims.up;
+			if(flame){flame.currentAnim = flame.anims.up; };
 		}
 		if(ig.input.state("left")){
 			this.vel.x = -this.acceleration.x;

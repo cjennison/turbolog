@@ -8,7 +8,8 @@ ig.module(
 	'plugins.zmagic',
     'plugins.analog-stick',
 	'game.entities.player',
-	'game.entities.ui.healthbar'
+	'game.entities.ui.healthbar',
+	'game.entities.controllers.enemycontroller'
 )
 .defines(function(){
 
