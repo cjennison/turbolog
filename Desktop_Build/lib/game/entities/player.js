@@ -36,16 +36,21 @@ EntityPlayer = ig.Entity.extend({
 		
 		
 		var flame = ig.game.getEntitiesByType(EntityFlames)[0];
-				if(flame){
-					flame.pos.x = this.pos.x + 2;
-					flame.pos.y = this.pos.y + 2;
-				}
+		if(flame){
+			flame.pos.x = this.pos.x + 2;
+			flame.pos.y = this.pos.y + 2;
+		}
 		
 		if(Math.abs(this.vel.y) < 10){
 			this.currentAnim = this.anims.idle;
 			flame.currentAnim = flame.anims.idle;
 		}
-		
+		this.checkInput();
+		this.checkLimits();
+
+	},
+	
+	checkInput:function(){
 		if(ig.input.state("down")){
 			this.vel.y = this.acceleration.y;
 			this.currentAnim = this.anims.down;
@@ -65,9 +70,30 @@ EntityPlayer = ig.Entity.extend({
 		
 		
 		if(ig.input.pressed('shoot')){
-			ig.game.spawnEntity(EntityBullet, this.pos.x + this.size.x, this.pos.y + this.size.y/2 - 2);
+			ig.game.spawnEntity(EntityBullet, this.pos.x + this.size.x - 2, this.pos.y + this.size.y/2 - 2);
 		}
-		//console.log(this.vel)
+	},
+	
+	checkLimits:function(){
+		if(this.pos.x < 0){
+			this.pos.x = 1;
+			this.vel.x = 0;
+		}
+		
+		if(this.pos.x > ig.system.width - this.size.x){
+			this.pos.x = ig.system.width - this.size.x - 1;
+			this.vel.x = 0;
+		}
+		
+		if(this.pos.y < 0){
+			this.pos.y = 1;
+			this.vel.y = 0;
+		}
+		
+		if(this.pos.y > ig.system.height - this.size.y){
+			this.pos.y = ig.system.height - this.size.y - 1;
+			this.vel.y = 0;
+		}
 	}
 
 });
