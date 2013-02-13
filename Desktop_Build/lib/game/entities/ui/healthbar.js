@@ -18,6 +18,9 @@ EntityHealthBar = ig.Entity.extend({
  
         // Pass In Unit enity to this variable
         Unit:0,
+        alpha:0,
+        alphaTimer:null,
+        alphaFade:5,
  
     // Add Animations for every 10 percent health lost
     // set zIndex to make sure its in front
@@ -37,13 +40,19 @@ EntityHealthBar = ig.Entity.extend({
  
             this.parent( x, y, settings );
             this.zIndex = 6;
+            
+    },
+    
+    showHealthBar:function(){
+    	this.alpha = 1;
+    	this.alphaTimer = new ig.Timer();
     },
  
         update: function()
         {
         // Used to follow the Unit its assigned to.
         if(this.Unit != 0){
-        	this.pos.x = this.Unit.pos.x;
+        	this.pos.x = this.Unit.pos.x - this.Unit.size.x/2;
         	this.pos.y = this.Unit.pos.y - 10;
  		}
         //Checks the Health Values
@@ -115,8 +124,22 @@ EntityHealthBar = ig.Entity.extend({
         else if (this.Unit.health <= 0 )
         {
             this.kill();
+            this.Unit.kill();
         }
+        
+                this.currentAnim.alpha = this.alpha;
+                if(this.alphaTimer){
+                	if(this.alphaTimer.delta() > 2){
+	                	this.alpha = (3 - this.alphaTimer.delta());
+	                	if(this.alphaTimer.delta() >= 3){
+	                		this.alphaTimer = null;
+	                		this.alpha = 0;
+	                	}
+                	}
+                }
+
         }
+        
  
 });
  

@@ -20,7 +20,11 @@ EntityPlayer = ig.Entity.extend({
 	collides: ig.Entity.COLLIDES.PASSIVE,
 	
 	animSheet: new ig.AnimationSheet('media/characters/turbolog.png', 42, 22),
-	
+	health:100,
+	ability:80,
+	rechargeRate:.01,
+	maxAbility:80,
+	toughness:2,
 	
 	init:function(x, y, settings){
 		this.parent(x, y, settings);
@@ -44,6 +48,9 @@ EntityPlayer = ig.Entity.extend({
 		if(Math.abs(this.vel.y) < 10){
 			this.currentAnim = this.anims.idle;
 			flame.currentAnim = flame.anims.idle;
+		}
+		if(this.maxAbility > this.ability){
+			this.ability += this.rechargeRate;
 		}
 		
 		this.checkInput(flame);
@@ -71,6 +78,7 @@ EntityPlayer = ig.Entity.extend({
 		
 		
 		if(ig.input.pressed('shoot')){
+			this.ability--;
 			ig.game.spawnEntity(EntityBullet, this.pos.x + this.size.x - 2, this.pos.y + this.size.y/2 - 2);
 		}
 	},
@@ -95,7 +103,12 @@ EntityPlayer = ig.Entity.extend({
 			this.pos.y = ig.system.height - this.size.y - 1;
 			this.vel.y = 0;
 		}
+	},
+	
+	hurt:function(amt){
+		this.health -= (amt - this.toughness)
 	}
+	
 
 });
 
@@ -164,7 +177,8 @@ EntityBullet = ig.Entity.extend({
 			//Did i hit one of those type B things?
 			check: function( other ){
 				console.log("LOL");
-				other.kill();
+				other.health--;
+				other.sendHit();
 				this.kill();
 			} 
 			

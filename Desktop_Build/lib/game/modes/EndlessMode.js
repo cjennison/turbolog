@@ -21,6 +21,7 @@ EndlessMode = ig.Game.extend({
 	player:null,
 	flames:null,
 	healthbar:null,
+	 barWidth: 1,
 		
 	init: function() {
 		// Initialize your game here; bind keys etc.
@@ -31,6 +32,7 @@ EndlessMode = ig.Game.extend({
         ig.input.bind(ig.KEY.UP_ARROW, 'up');
         ig.input.bind(ig.KEY.DOWN_ARROW, 'down');
         ig.input.bind(ig.KEY.Z, 'shoot');
+		
 		
 
 		//Joystick
@@ -47,7 +49,7 @@ EndlessMode = ig.Game.extend({
 		this.spawnEntity(EntityIslandZone, 0, 0)
 		this.flames = this.spawnEntity(EntityFlames, 40, ig.system.height/2);
 		this.player = this.spawnEntity(EntityPlayer, 40, ig.system.height/2);
-		this.healthbar = this.spawnEntity(EntityHealthBar, 10, 10, {Unit:this.player});
+		//this.healthbar = this.spawnEntity(EntityHealthBar, 10, 10, {Unit:this.player});
 		
 		this.spawnEntity(EntityEnemyController, 0, 0);
 		
@@ -63,6 +65,22 @@ EndlessMode = ig.Game.extend({
 	draw: function() {
 		// Draw all entities and backgroundMaps
 		this.parent();
+		if(this.player){
+			//health bar
+			ig.system.context.fillStyle = "rgb(255,0,0)";
+	        ig.system.context.beginPath();
+	        ig.system.context.rect(10, 6, this.barWidth * this.player.health, 6);
+	        ig.system.context.closePath();
+	        ig.system.context.fill();
+	        
+	        //ability bar
+	        ig.system.context.fillStyle = "rgb(255,255,0)";
+	        ig.system.context.beginPath();
+	        ig.system.context.rect(10, 18, this.barWidth * this.player.ability, 6);
+	        ig.system.context.closePath();
+	        ig.system.context.fill();
+		}
+		
 		
 		if(ig.ua.mobile){
 			this.stickLeft.draw();
