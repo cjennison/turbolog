@@ -97,7 +97,7 @@ EndlessMode = ig.Game.extend({
 		var x = ig.system.width/2,
 			y = ig.system.height/2;
 		
-		//this.font.draw( 'It Works!', x, y, ig.Font.ALIGN.CENTER );
+		this.font.draw( 'Money: ' + this.money, 30, 30, ig.Font.ALIGN.CENTER );
 	}
 });
 

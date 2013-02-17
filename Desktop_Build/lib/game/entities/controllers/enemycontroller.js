@@ -45,17 +45,20 @@ ig.module(
             for (var i = 0; i < this.particles; i++) {
                 if (Math.random() < .8) {
                     ig.game.spawnEntity(EntityCoin, x, y, {
+                    	value: 1,
                         colorOffset: settings.colorOffset ? settings.colorOffset : 0
                     });
                 }
-                if (Math.random() > .8 && Math.random() < .95) {
+                if (Math.random() > .9 && Math.random() < .98) {
                     ig.game.spawnEntity(EntityCoin, x, y, {
+                    	value: 10,
                         colorOffset: settings.colorOffset ? settings.colorOffset : 1
                     });
 
                 }
-                if (Math.random() > .95 && Math.random() < 1) {
+                if (Math.random() > .98 && Math.random() < 1) {
                     ig.game.spawnEntity(EntityCoin, x, y, {
+                    	value:25,
                         colorOffset: settings.colorOffset ? settings.colorOffset : 2
                     });
 
@@ -85,6 +88,7 @@ ig.module(
 				collides: ig.Entity.COLLIDES.LITE,
 				colorOffset: 0,
 				totalColors: 7,
+				value: 1,
 				
 				type: ig.Entity.TYPE.NONE,
 				checkAgainst: ig.Entity.TYPE.A, //I hate baddies
@@ -106,6 +110,7 @@ ig.module(
 					
 					//set the timer
 					this.idleTimer = new ig.Timer();
+					this.enableTimer = new ig.Timer();
 				},
 				
 				update: function() {
@@ -121,8 +126,11 @@ ig.module(
 				},
 				
 				check: function(other){
-					this.kill();
-					ig.game.money += (10 * this.colorOffset);
+					if(this.enableTimer.delta() > .3){
+						this.kill();
+						ig.game.money += (this.value);
+					}
+					
 				}
 			});			
 

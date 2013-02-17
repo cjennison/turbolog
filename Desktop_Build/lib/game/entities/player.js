@@ -19,7 +19,7 @@ EntityPlayer = ig.Entity.extend({
 	checkAgainst: ig.Entity.TYPE.B,
 	collides: ig.Entity.COLLIDES.PASSIVE,
 	
-	animSheet: new ig.AnimationSheet('media/characters/turbolog.png', 32, 32),
+	animSheet: new ig.AnimationSheet('media/characters/turbologtwo.png', 32, 32),
 	health:100,
 	ability:80,
 	rechargeRate:.01,
