@@ -19,7 +19,7 @@ EntityPlayer = ig.Entity.extend({
 	checkAgainst: ig.Entity.TYPE.B,
 	collides: ig.Entity.COLLIDES.PASSIVE,
 	
-	animSheet: new ig.AnimationSheet('media/characters/turbolog.png', 42, 22),
+	animSheet: new ig.AnimationSheet('media/characters/turbolog.png', 32, 32),
 	health:100,
 	ability:80,
 	rechargeRate:.01,
@@ -28,9 +28,9 @@ EntityPlayer = ig.Entity.extend({
 	
 	init:function(x, y, settings){
 		this.parent(x, y, settings);
-		this.addAnim('idle', 1, [0]);
-		this.addAnim('up', 1, [1]);
-		this.addAnim('down', 1, [4]);
+		this.addAnim('idle', 1, [6]);
+		this.addAnim('up', 1, [2]);
+		this.addAnim('down', 1, [5]);
 		
 		this.gravityFactor = 0;
 	},
@@ -42,7 +42,7 @@ EntityPlayer = ig.Entity.extend({
 		var flame = ig.game.getEntitiesByType(EntityFlames)[0];
 		if(flame){
 			flame.pos.x = this.pos.x + 2;
-			flame.pos.y = this.pos.y + 2;
+			flame.pos.y = this.pos.y + 9;
 		}
 		
 		if(Math.abs(this.vel.y) < 10){

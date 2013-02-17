@@ -28,7 +28,7 @@ EndlessMode = ig.Game.extend({
 	
 	//Game Variables
 	distance:0,
-	
+	money:0,
 		
 	init: function() {
 		// Initialize your game here; bind keys etc.
