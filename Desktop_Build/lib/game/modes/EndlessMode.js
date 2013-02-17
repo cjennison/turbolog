@@ -9,6 +9,7 @@ ig.module(
     'plugins.analog-stick',
 	'game.entities.player',
 	'game.entities.ui.healthbar',
+	'game.entities.ui.distancemeter',
 	'game.entities.controllers.enemycontroller',
 	'game.entities.enemies.zones.islandzone.sawbladey',
 	'game.entities.zones.islandzone'
@@ -16,12 +17,18 @@ ig.module(
 .defines(function(){
 
 EndlessMode = ig.Game.extend({
+	
 	// Load a font
 	font: new ig.Font( 'media/04b03.font.png' ),
 	player:null,
 	flames:null,
 	healthbar:null,
-	 barWidth: 1,
+	distancemeter:null,
+	barWidth: 1,
+	
+	//Game Variables
+	distance:0,
+	
 		
 	init: function() {
 		// Initialize your game here; bind keys etc.
@@ -50,7 +57,7 @@ EndlessMode = ig.Game.extend({
 		this.flames = this.spawnEntity(EntityFlames, 40, ig.system.height/2);
 		this.player = this.spawnEntity(EntityPlayer, 40, ig.system.height/2);
 		//this.healthbar = this.spawnEntity(EntityHealthBar, 10, 10, {Unit:this.player});
-		
+		this.distancemeter = this.spawnEntity(EntityDistanceMeter, 0, 200)
 		this.spawnEntity(EntityEnemyController, 0, 0);
 		
 		
@@ -58,6 +65,7 @@ EndlessMode = ig.Game.extend({
 	
 	update: function() {
 		// Update all entities and backgroundMaps
+		this.distance+= .01;
 		this.parent();
 		
 	},

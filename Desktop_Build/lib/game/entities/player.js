@@ -94,13 +94,13 @@ EntityPlayer = ig.Entity.extend({
 			this.vel.x = 0;
 		}
 		
-		if(this.pos.y < 0){
-			this.pos.y = 1;
+		if(this.pos.y < 30){
+			this.pos.y = 31;
 			this.vel.y = 0;
 		}
 		
-		if(this.pos.y > ig.system.height - this.size.y){
-			this.pos.y = ig.system.height - this.size.y - 1;
+		if(this.pos.y > ig.system.height - this.size.y - 30){
+			this.pos.y = ig.system.height - this.size.y - 31;
 			this.vel.y = 0;
 		}
 	},
