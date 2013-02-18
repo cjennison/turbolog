@@ -26,7 +26,8 @@ ig.module(
             this.parent();
 
             if (this.sawBladeyTimer.delta() > 2) {
-                var yPos = Math.random() * ig.system.height - 20;
+                var yPos = Math.random() * ig.system.height - 30;
+                if(yPos < 40){ yPos = 40 };
                 ig.game.spawnEntity(EntitySawBladey, this.xPos, yPos);
                 this.sawBladeyTimer.reset();
             }

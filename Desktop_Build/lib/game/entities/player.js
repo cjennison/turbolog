@@ -82,7 +82,7 @@ EntityPlayer = ig.Entity.extend({
 			ig.game.spawnEntity(EntityBullet, this.pos.x + this.size.x - 2, this.pos.y + this.size.y/2 - 2);
 		}
 		
-		ig.game.spawnEntity(EntityDeathExplosion, this.pos.x, this.pos.y + 15);
+		ig.game.spawnEntity(EntityDeathExplosion, this.pos.x, this.pos.y + 15 + (Math.random() * 15 - 7.5));
 
 	},
 	
@@ -231,7 +231,7 @@ EntityBullet = ig.Entity.extend({
 					this.addAnim('idle', 0.2, [frameID]);
 					
 					//Random directions to make it a bit more interesting..
-					this.vel.x = (Math.random()*2 - 2) * this.vel.x;
+					this.vel.x = (Math.random()*2 - 4) * this.vel.x;
 					this.vel.y = (Math.random()*2 - 1) * this.vel.y;
 					
 					//set the timer
