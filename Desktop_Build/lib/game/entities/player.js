@@ -25,6 +25,7 @@ EntityPlayer = ig.Entity.extend({
 	rechargeRate:.01,
 	maxAbility:80,
 	toughness:2,
+	dying:false,
 	
 	init:function(x, y, settings){
 		this.parent(x, y, settings);
@@ -45,10 +46,19 @@ EntityPlayer = ig.Entity.extend({
 			flame.pos.y = this.pos.y + 9;
 		}
 		
+		
+		if(this.dying){
+			this.die();
+			return;
+		}
+		
+		
 		if(Math.abs(this.vel.y) < 10){
 			this.currentAnim = this.anims.idle;
 			flame.currentAnim = flame.anims.idle;
 		}
+		
+		
 		if(this.maxAbility > this.ability){
 			this.ability += this.rechargeRate;
 		}
@@ -56,6 +66,13 @@ EntityPlayer = ig.Entity.extend({
 		this.checkInput(flame);
 		this.checkLimits();
 
+	},
+	
+	die:function(){
+		this.pos.y += 1;
+		if(this.pos.y > ig.system.height){
+			
+		}
 	},
 	
 	checkInput:function(flame){
@@ -82,7 +99,7 @@ EntityPlayer = ig.Entity.extend({
 			ig.game.spawnEntity(EntityBullet, this.pos.x + this.size.x - 2, this.pos.y + this.size.y/2 - 2);
 		}
 		
-		ig.game.spawnEntity(EntityDeathExplosion, this.pos.x, this.pos.y + 15 + (Math.random() * 15 - 7.5));
+		ig.game.spawnEntity(EntityDeathExplosion, this.pos.x + 4, this.pos.y + 15 + (Math.random() * 15 - 7.5));
 
 	},
 	
@@ -109,7 +126,10 @@ EntityPlayer = ig.Entity.extend({
 	},
 	
 	hurt:function(amt){
-		this.health -= (amt - this.toughness)
+		this.health -= (amt - this.toughness);
+		if(this.health <= 0){
+			this.dying = true;
+		}
 	}
 	
 
