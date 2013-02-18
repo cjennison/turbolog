@@ -81,6 +81,9 @@ EntityPlayer = ig.Entity.extend({
 			this.ability--;
 			ig.game.spawnEntity(EntityBullet, this.pos.x + this.size.x - 2, this.pos.y + this.size.y/2 - 2);
 		}
+		
+		ig.game.spawnEntity(EntityDeathExplosion, this.pos.x, this.pos.y + 15);
+
 	},
 	
 	checkLimits:function(){
@@ -183,6 +186,67 @@ EntityBullet = ig.Entity.extend({
 			} 
 			
 		});
-
+		
+		EntityDeathExplosion = ig.Entity.extend({
+				//vars
+				lifetime: 1,
+				callBack:null,
+				particles: 1,
+				
+				init: function(x, y, settings){
+					this.parent(x, y, settings);
+					for (var i = 0; i < this.particles; i++){
+						ig.game.spawnEntity(EntityDeathExplosionParticle, x, y,{colorOffset: settings.colorOffset ? settings.colorOffset : 0});
+						this.idleTimer = new ig.Timer();
+					}
+				},
+				update: function() {
+					if (this.idleTimer.delta() > this.lifetime){
+						this.kill();
+						if(this.callBack)
+							this.callBack();
+						return;
+					}
+				}, 
+			});
+		EntityDeathExplosionParticle = ig.Entity.extend({
+		
+				size: {x:2, y:2},
+				maxVel: {x:160, y:200},
+				lifetime: .5,
+				fadetime: .3,
+				bounciness: 0,
+				vel: {x:100, y:30},
+				friction: {x:100, y:0},
+				collides: ig.Entity.COLLIDES.LITE,
+				colorOffset: 0,
+				totalColors: 7,
+				animSheet: new ig.AnimationSheet( 'media/drops/blood.png', 2, 2),
+				
+				init: function(x, y, settings){
+					this.parent(x, y, settings);
+					
+					//Figure out if its the Human blood or the Zombie blood!
+					var frameID = Math.round(Math.random()*this.totalColors) + (this.colorOffset * (this.totalColors+1)); //Random pixel of the total colors(1-8) + the offset * teh size of the colors(7)[Pixel 5 of Offset 0(Human)]
+					this.addAnim('idle', 0.2, [frameID]);
+					
+					//Random directions to make it a bit more interesting..
+					this.vel.x = (Math.random()*2 - 2) * this.vel.x;
+					this.vel.y = (Math.random()*2 - 1) * this.vel.y;
+					
+					//set the timer
+					this.idleTimer = new ig.Timer();
+				},
+				
+				update: function() {
+					if (this.idleTimer.delta() > this.lifetime){
+						this.kill();
+						return;
+					}
+					//Slowly Decrease Alpha
+					this.currentAnim.alpha = this.idleTimer.delta().map(this.lifetime - this.fadetime, this.lifetime, 1, 0);
+					this.parent();
+				},
+			});
 
 });
