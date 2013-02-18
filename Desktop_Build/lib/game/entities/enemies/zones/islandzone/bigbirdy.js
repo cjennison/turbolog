@@ -60,7 +60,7 @@ EntityBigBirdy = ig.Entity.extend({
 	},
 	
 	sendHit:function(){
-		
+		this.kill();
 	},
 	
 	kill:function(){
