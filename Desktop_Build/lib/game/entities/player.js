@@ -20,16 +20,17 @@ EntityPlayer = ig.Entity.extend({
 	collides: ig.Entity.COLLIDES.PASSIVE,
 	
 	animSheet: new ig.AnimationSheet('media/characters/turbologtwo.png', 32, 32),
-	health:100,
+	health:10,
 	ability:80,
 	rechargeRate:.01,
 	maxAbility:80,
 	toughness:2,
 	dying:false,
+	deathTimer:null,
 	
 	init:function(x, y, settings){
 		this.parent(x, y, settings);
-		this.addAnim('idle', 1, [6]);
+		this.addAnim('idle', .3, [6]);
 		this.addAnim('up', 1, [2]);
 		this.addAnim('down', 1, [5]);
 		
@@ -72,6 +73,14 @@ EntityPlayer = ig.Entity.extend({
 		this.pos.y += 1;
 		if(this.pos.y > ig.system.height){
 			
+		}
+		if(this.deathTimer == null){ return; }
+		if(this.deathTimer.delta() > 3){
+			this.deathTimer = null;
+			ig.game.spawnEntity(EntityBlackOverlay, 0,0);
+
+			ig.game.spawnEntity(EntityDeathAnim, ig.system.width/2 - 256/2, 10);
+
 		}
 	},
 	
@@ -129,6 +138,9 @@ EntityPlayer = ig.Entity.extend({
 		this.health -= (amt - this.toughness);
 		if(this.health <= 0){
 			this.dying = true;
+			this.deathTimer = new ig.Timer();
+			ig.game.getEntitiesByType(EntityEnemyController)[0].killController();
+			
 		}
 	}
 	

@@ -31,6 +31,10 @@ ig.module(
                 ig.game.spawnEntity(EntitySawBladey, this.xPos, yPos);
                 this.sawBladeyTimer.reset();
             }
+        },
+        
+        killController:function(){
+        	this.kill();
         }
 
     });

@@ -10,6 +10,7 @@ ig.module(
 	'game.entities.player',
 	'game.entities.ui.healthbar',
 	'game.entities.ui.distancemeter',
+	'game.entities.dynamictext.gametextcontroller',
 	'game.entities.controllers.enemycontroller',
 	'game.entities.enemies.zones.islandzone.sawbladey',
 	'game.entities.zones.islandzone'
@@ -24,7 +25,7 @@ EndlessMode = ig.Game.extend({
 	flames:null,
 	healthbar:null,
 	distancemeter:null,
-	barWidth: 1,
+	barWidth: 1.8,
 	
 	//Game Variables
 	distance:0,
@@ -59,6 +60,7 @@ EndlessMode = ig.Game.extend({
 		//this.healthbar = this.spawnEntity(EntityHealthBar, 10, 10, {Unit:this.player});
 		this.distancemeter = this.spawnEntity(EntityDistanceMeter, 0, 200)
 		this.spawnEntity(EntityEnemyController, 0, 0);
+		this.spawnEntity(EntityIslandZoneText, -200, 100)
 		
 		
 	},
@@ -73,20 +75,19 @@ EndlessMode = ig.Game.extend({
 	draw: function() {
 		// Draw all entities and backgroundMaps
 		this.parent();
-		if(this.player){
-			//health bar
-			ig.system.context.fillStyle = "rgb(255,0,0)";
-	        ig.system.context.beginPath();
-	        ig.system.context.rect(10, 6, this.barWidth * this.player.health, 6);
-	        ig.system.context.closePath();
-	        ig.system.context.fill();
+		if(this.player && this.player.dying == false){
+			
+			var img = new ig.Image('media/ui/HealthBarTwo.png');
+			img.draw(10,1, 0, 0, this.barWidth * this.player.health, 25);
 	        
 	        //ability bar
 	        ig.system.context.fillStyle = "rgb(255,255,0)";
 	        ig.system.context.beginPath();
-	        ig.system.context.rect(10, 18, this.barWidth * this.player.ability, 6);
+	        ig.system.context.rect(10, 30, this.barWidth * this.player.ability, 6);
 	        ig.system.context.closePath();
 	        ig.system.context.fill();
+	        		this.font.draw( 'Money: ' + this.money, 30, 40, ig.Font.ALIGN.CENTER );
+
 		}
 		
 		
@@ -97,7 +98,6 @@ EndlessMode = ig.Game.extend({
 		var x = ig.system.width/2,
 			y = ig.system.height/2;
 		
-		this.font.draw( 'Money: ' + this.money, 30, 30, ig.Font.ALIGN.CENTER );
 	}
 });
 
