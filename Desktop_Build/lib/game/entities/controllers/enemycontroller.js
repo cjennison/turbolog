@@ -109,7 +109,7 @@ ig.module(
 				collides: ig.Entity.COLLIDES.PASSIVE,
 				
 				
-				animSheet: new ig.AnimationSheet( 'media/drops/coins.png', 8, 8),
+				animSheet: new ig.AnimationSheet( 'media/drops/coin.png', 12, 12),
 				
 				init: function(x, y, settings){
 					this.parent(x, y, settings);

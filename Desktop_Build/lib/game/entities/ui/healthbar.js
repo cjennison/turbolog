@@ -52,7 +52,7 @@ EntityHealthBar = ig.Entity.extend({
         {
         // Used to follow the Unit its assigned to.
         if(this.Unit != 0){
-        	this.pos.x = this.Unit.pos.x - this.Unit.size.x/2;
+        	this.pos.x = this.Unit.pos.x - this.Unit.size.x/2 + this.size.x/2;
         	this.pos.y = this.Unit.pos.y - 10;
  		}
         //Checks the Health Values

@@ -8,13 +8,13 @@ ig.module(
 .defines(function(){
  
 EntitySawBladey = ig.Entity.extend({
-	size:{x:16, y:16},
+	size:{x:32, y:32},
 	
 	type: ig.Entity.TYPE.B, 
 	checkAgainst: ig.Entity.TYPE.A,
 	collides: ig.Entity.COLLIDES.PASSIVE,
 	
-	animSheet: new ig.AnimationSheet('media/enemies/sawblade.png', 16, 16),
+	animSheet: new ig.AnimationSheet('media/enemies/saw.png', 32, 32),
 	healthbar:null,
 	health:2,
 	MaxHealth:2,
@@ -23,7 +23,7 @@ EntitySawBladey = ig.Entity.extend({
 	init:function(x,y,settings){
 		this.parent(x,y,settings);
 		
-		this.addAnim('idle', .3, [0,1,2,3]);
+		this.addAnim('idle', .05, [0,1,2,3,4,5,6]);
 		this.healthbar = ig.game.spawnEntity(EntityHealthBar, 10, 10, {Unit:this});
 	},
 		
