@@ -15,6 +15,7 @@ ig.module(
 	'impact.game',
 	'impact.font',
 	'game.screens.mainmenu',
+	'game.screens.introduction',
 	'game.modes.endlessmode'
 )
 .defines(function(){
@@ -61,5 +62,5 @@ MyGame = ig.Game.extend({
          
          ig.System.drawMode = ig.System.DRAW.SMOOTH;
          //ig.Sound.use = [ig.Sound.FORMAT.CAF, ig.Sound.FORMAT.OGG, ig.Sound.FORMAT.MP3];
-		ig.main( '#canvas', MainMenu, 60, width, height, 1 );
+		ig.main( '#canvas', Introduction, 60, width, height, 1 );
 });

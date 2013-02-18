@@ -21,7 +21,7 @@ EntityDistanceMeter = ig.Entity.extend({
     
     draw: function() {
     	this.meter.draw(ig.system.width/2 - this.meter.width/2,ig.system.height - 30);
-    	this.log_icon.draw(90 + ig.game.distance*2, 210);
+    	this.log_icon.draw((ig.system.width/2 - this.meter.width/2 - 10) + ig.game.distance, 210);
         this.parent();
     }
     

@@ -8,7 +8,7 @@ ig.module(
 .defines(function(){
  
 EntityBigBirdy = ig.Entity.extend({
-	size: {x: 16, y: 16},
+	size: {x: 32, y: 32},
 			
 			animSheet: new ig.AnimationSheet('media/enemies/seagull.png', 32, 32),
 

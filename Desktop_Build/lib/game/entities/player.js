@@ -104,8 +104,11 @@ EntityPlayer = ig.Entity.extend({
 		
 		
 		if(ig.input.pressed('shoot')){
-			this.ability--;
-			ig.game.spawnEntity(EntityBullet, this.pos.x + this.size.x - 2, this.pos.y + this.size.y/2 - 2);
+			
+			if(this.ability > 10){
+				this.ability--;
+				ig.game.spawnEntity(EntityBullet, this.pos.x + this.size.x - 2, this.pos.y + this.size.y/2 - 2);
+			}
 		}
 		
 		ig.game.spawnEntity(EntityDeathExplosion, this.pos.x + 4, this.pos.y + 15 + (Math.random() * 15 - 7.5));
