@@ -1,3 +1,13 @@
+
+//TEMPORARY VARIABLES
+var new_money = 0;
+var new_exp = 0;
+
+//TOTAL VARIABLES
+var TOTAL_MONEY = 0;
+var TOTAL_EXP = 0;
+var CURRENT_LEVEL = 0;
+
 ig.module( 
 	'game.main' 
 )
@@ -17,6 +27,7 @@ MyGame = ig.Game.extend({
 	
 	init: function() {
 		// Initialize your game here; bind keys etc.
+		
 	},
 	
 	update: function() {

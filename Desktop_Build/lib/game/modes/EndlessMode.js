@@ -75,6 +75,7 @@ EndlessMode = ig.Game.extend({
 		
 		if(this.killGameTimer){
 			if(this.killGameTimer.delta() > 6){
+				new_money = this.money;
 				ig.system.setGame(EndScreen)
 			}
 		}
