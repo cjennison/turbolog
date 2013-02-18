@@ -94,9 +94,11 @@ EndlessMode = ig.Game.extend({
 			var img = new ig.Image('media/ui/HealthBarTwo.png');
 			img.draw(10,1, 0, 0, this.barWidth * this.player.health, 25);
 	        
-	        var aimg = new ig.Image('media/ui/AbilityBar.png');
-			aimg.draw(10,20, 0, 0, this.barWidth * this.player.ability, 25);
-	        this.font.draw( 'Money: ' + this.money, 50, 50, ig.Font.ALIGN.CENTER );
+	        if(this.player.ability > 0){
+	        	var aimg = new ig.Image('media/ui/AbilityBar.png');
+				aimg.draw(10,20, 0, 0, this.barWidth * this.player.ability, 25);
+	        }
+	         this.font.draw( 'Money: ' + this.money, 50, 50, ig.Font.ALIGN.CENTER );
 
 		}
 		
