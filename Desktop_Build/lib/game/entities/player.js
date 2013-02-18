@@ -42,8 +42,8 @@ EntityPlayer = ig.Entity.extend({
 		
 		var flame = ig.game.getEntitiesByType(EntityFlames)[0];
 		if(flame){
-			flame.pos.x = this.pos.x + 2;
-			flame.pos.y = this.pos.y + 9;
+			flame.pos.x = this.pos.x - 16;
+			flame.pos.y = this.pos.y + 0;
 		}
 		
 		
@@ -145,7 +145,7 @@ EntityFlames= ig.Entity.extend ({
 			checkAgainst: ig.Entity.TYPE.NONE, //I hate baddies
 			collides: ig.Entity.COLLIDES.PASSIVE,
 			
-			animSheet: new ig.AnimationSheet('media/characters/flames.png', 32, 16),
+			animSheet: new ig.AnimationSheet('media/characters/fire.png', 64, 32),
 			
 			init: function(x,y,settings){
 				this.parent(x,y,settings);
@@ -155,9 +155,9 @@ EntityFlames= ig.Entity.extend ({
 			
 			setAnimations: function(offset){
 				offset = offset * 3;
-				this.addAnim('idle', .1, [0,1,2,3,4]);
-				this.addAnim('up', .1, [5,6,7,8,9]);
-				this.addAnim('down', .1, [10,11,12,13,14]);
+				this.addAnim('idle', .1, [0,1,2,3]);
+				this.addAnim('up', .1, [6,7,8]);
+				this.addAnim('down', .1, [10,11,12,13]);
 				this.currentAnim = this.anims.idle;
 			},
 			
