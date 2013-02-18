@@ -7,7 +7,8 @@ ig.module(
 	'plugins.touch-button',
 	'plugins.zmagic',
     'plugins.analog-stick',
-	'game.entities.player',
+	'game.screens.endscreen', 
+		'game.entities.player',
 	'game.entities.ui.healthbar',
 	'game.entities.ui.distancemeter',
 	'game.entities.dynamictext.gametextcontroller',
@@ -30,6 +31,8 @@ EndlessMode = ig.Game.extend({
 	//Game Variables
 	distance:0,
 	money:0,
+	multiplier:1,
+	
 		
 	init: function() {
 		// Initialize your game here; bind keys etc.
@@ -68,8 +71,18 @@ EndlessMode = ig.Game.extend({
 	update: function() {
 		// Update all entities and backgroundMaps
 		this.distance+= .01;
+		
+		if(this.killGameTimer){
+			if(this.killGameTimer.delta() > 6){
+				ig.system.setGame(EndScreen)
+			}
+		}
 		this.parent();
 		
+	},
+	
+	prepareToKillGame:function(){
+		this.killGameTimer = new ig.Timer();
 	},
 	
 	draw: function() {
@@ -80,13 +93,9 @@ EndlessMode = ig.Game.extend({
 			var img = new ig.Image('media/ui/HealthBarTwo.png');
 			img.draw(10,1, 0, 0, this.barWidth * this.player.health, 25);
 	        
-	        //ability bar
-	        ig.system.context.fillStyle = "rgb(255,255,0)";
-	        ig.system.context.beginPath();
-	        ig.system.context.rect(10, 30, this.barWidth * this.player.ability, 6);
-	        ig.system.context.closePath();
-	        ig.system.context.fill();
-	        		this.font.draw( 'Money: ' + this.money, 30, 40, ig.Font.ALIGN.CENTER );
+	        var aimg = new ig.Image('media/ui/AbilityBar.png');
+			aimg.draw(10,20, 0, 0, this.barWidth * this.player.ability, 25);
+	        this.font.draw( 'Money: ' + this.money, 50, 50, ig.Font.ALIGN.CENTER );
 
 		}
 		

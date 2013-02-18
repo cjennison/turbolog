@@ -139,6 +139,7 @@ EntityPlayer = ig.Entity.extend({
 		if(this.health <= 0){
 			this.dying = true;
 			this.deathTimer = new ig.Timer();
+			ig.game.prepareToKillGame();
 			ig.game.getEntitiesByType(EntityEnemyController)[0].killController();
 			
 		}
