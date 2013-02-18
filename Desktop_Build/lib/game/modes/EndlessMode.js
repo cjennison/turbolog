@@ -14,6 +14,7 @@ ig.module(
 	'game.entities.dynamictext.gametextcontroller',
 	'game.entities.controllers.enemycontroller',
 	'game.entities.enemies.zones.islandzone.sawbladey',
+	'game.entities.enemies.zones.islandzone.bigbirdy',
 	'game.entities.zones.islandzone'
 )
 .defines(function(){

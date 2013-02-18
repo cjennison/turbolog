@@ -12,11 +12,14 @@ ig.module(
         yPos: null,
 
         sawBladeyTimer: null,
+        bigBirdyTimer: null,
 
         init: function (x, y, settings) {
             this.parent(x, y, settings);
 
             this.sawBladeyTimer = new ig.Timer();
+            this.bigBirdyTimer = new ig.Timer();
+
 
             this.xPos = ig.system.width;
 
@@ -30,6 +33,12 @@ ig.module(
                 if(yPos < 40){ yPos = 40 };
                 ig.game.spawnEntity(EntitySawBladey, this.xPos, yPos);
                 this.sawBladeyTimer.reset();
+            }
+            if (this.bigBirdyTimer.delta() > 2) {
+                var yPos = Math.random() * ig.system.height - 30;
+                if(yPos < 40){ yPos = 40 };
+                ig.game.spawnEntity(EntityBigBirdy, this.xPos, yPos);
+                this.bigBirdyTimer.reset();
             }
         },
         

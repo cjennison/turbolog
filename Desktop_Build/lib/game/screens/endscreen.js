@@ -39,7 +39,7 @@ EndScreen = ig.Game.extend({
 		var x = ig.system.width/2,
 			y = ig.system.height/2;
 			
-		this.font.draw( 'Oye', 50, 50, ig.Font.ALIGN.CENTER );
+		this.font.draw( 'Press Enter to Replay', 50, 50, ig.Font.ALIGN.CENTER );
 
 		
 	}
