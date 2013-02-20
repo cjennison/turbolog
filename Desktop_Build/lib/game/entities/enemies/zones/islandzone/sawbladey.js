@@ -46,6 +46,9 @@ EntitySawBladey = ig.Entity.extend({
 	kill:function(){
 		this.parent();
 		ig.game.spawnEntity(EntityCoinExplosion, this.pos.x, this.pos.y)
+		if(GAME_TYPE == "STORY"){
+			ig.game.spawnEntity(EntityExpExplosion, this.pos.x, this.pos.y, {particles:3})
+		}
 	}
 
 });

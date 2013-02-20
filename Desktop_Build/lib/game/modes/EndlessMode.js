@@ -8,13 +8,15 @@ ig.module(
 	'plugins.zmagic',
     'plugins.analog-stick',
 	'game.screens.endscreen', 
-		'game.entities.player',
+	'game.entities.player',
 	'game.entities.ui.healthbar',
 	'game.entities.ui.distancemeter',
 	'game.entities.dynamictext.gametextcontroller',
 	'game.entities.controllers.enemycontroller',
 	'game.entities.enemies.zones.islandzone.sawbladey',
 	'game.entities.enemies.zones.islandzone.bigbirdy',
+	'game.entities.enemies.zones.islandzone.speedysaw',
+
 	'game.entities.zones.islandzone'
 )
 .defines(function(){
@@ -32,8 +34,10 @@ EndlessMode = ig.Game.extend({
 	//Game Variables
 	distance:0,
 	money:0,
+	exp:0,
 	multiplier:1,
 	
+	enemyInitTimer:null,
 		
 	init: function() {
 		// Initialize your game here; bind keys etc.
@@ -46,7 +50,7 @@ EndlessMode = ig.Game.extend({
         ig.input.bind(ig.KEY.Z, 'shoot');
 		
 		
-
+		this.enemyInitTimer = new ig.Timer();
 		//Joystick
 		var baseSize = 50;
    	    var stickSize = 20;
@@ -63,7 +67,6 @@ EndlessMode = ig.Game.extend({
 		this.player = this.spawnEntity(EntityPlayer, 40, ig.system.height/2);
 		//this.healthbar = this.spawnEntity(EntityHealthBar, 10, 10, {Unit:this.player});
 		this.distancemeter = this.spawnEntity(EntityDistanceMeter, 0, 200)
-		this.spawnEntity(EntityEnemyController, 0, 0);
 		this.spawnEntity(EntityIslandZoneText, -200, 100)
 		
 		
@@ -72,10 +75,18 @@ EndlessMode = ig.Game.extend({
 	update: function() {
 		// Update all entities and backgroundMaps
 		this.distance+= .01;
+		if(this.enemyInitTimer){
+			if(this.enemyInitTimer.delta() > 4){
+				this.spawnEntity(EntityEnemyController, 0, 0);
+				this.enemyInitTimer = null;
+			}
+		}
+		
 		
 		if(this.killGameTimer){
 			if(this.killGameTimer.delta() > 6){
 				new_money = this.money;
+				new_exp = this.exp;
 				ig.system.setGame(EndScreen)
 			}
 		}

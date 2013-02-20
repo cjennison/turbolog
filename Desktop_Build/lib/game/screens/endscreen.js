@@ -25,6 +25,11 @@ EndScreen = ig.Game.extend({
 	
 	update: function() {
 		
+		//Increase EXP Earned
+		if(new_exp > 0){
+			new_exp--;
+			TOTAL_EXP++;	
+		}
 		
 		//Increase Money Earned
 		if(new_money > 0){
@@ -50,6 +55,8 @@ EndScreen = ig.Game.extend({
 		var x = ig.system.width/2,
 			y = ig.system.height/2;
 		this.font.draw("MONEY: " + TOTAL_MONEY, x,y, ig.Font.ALIGN.LEFT)
+		this.font.draw("EXP: " + TOTAL_EXP, x,y + 20, ig.Font.ALIGN.LEFT)
+
 		if(new_money <= 0){
 			this.font.draw( 'Press Enter to Replay', x, y + 40, ig.Font.ALIGN.CENTER );
 		}

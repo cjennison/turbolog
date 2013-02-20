@@ -1,3 +1,7 @@
+var GAME_TYPE = "STORY";
+
+//STATISTIC VARIABLES
+var magnetism = 1;
 
 //TEMPORARY VARIABLES
 var new_money = 0;
