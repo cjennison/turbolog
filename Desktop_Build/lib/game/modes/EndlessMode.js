@@ -7,6 +7,7 @@ ig.module(
 	'plugins.touch-button',
 	'plugins.zmagic',
     'plugins.analog-stick',
+    'game.data.data',
 	'game.screens.endscreen', 
 	'game.entities.player',
 	'game.entities.ui.healthbar',
@@ -79,7 +80,8 @@ EndlessMode = ig.Game.extend({
 
         this.stickLeft = new ig.AnalogStick( x1, y, baseSize, stickSize );
 		
-		
+		var data = new ig.Data();
+		console.log(data.test)
 		//Init Entities
 		this.spawnEntity(EntityIslandZone, 0, 0)
 		this.flames = this.spawnEntity(EntityFlames, 40, ig.system.height/2);
@@ -119,10 +121,13 @@ EndlessMode = ig.Game.extend({
 		//Laser
 		if(!this.laserActive){
 			if(ig.input.pressed("laser")){
-				this.laserActive = true;
-				this.laserTimer = new ig.Timer();
-				this.laser = this.spawnEntity(EntityLaser, this.player.pos.x, this.player.pos.y, {player:this.player})
-				this.laserBeam = this.getEntitiesByType(EntityLaserBeam)[0];
+				if(NUM_LASERS > 1){
+					NUM_LASERS--;
+					this.laserActive = true;
+					this.laserTimer = new ig.Timer();
+					this.laser = this.spawnEntity(EntityLaser, this.player.pos.x, this.player.pos.y, {player:this.player})
+					this.laserBeam = this.getEntitiesByType(EntityLaserBeam)[0];
+				}
 			}
 		}
 		
@@ -138,9 +143,12 @@ EndlessMode = ig.Game.extend({
 		//Shield
 		if(!this.shieldActive){
 			if(ig.input.pressed("shield")){
-				this.shieldActive = true;
-				this.shieldTimer = new ig.Timer();
-				this.shield = this.spawnEntity(EntityShield, this.player.pos.x, this.player.pos.y, {player:this.player})
+				if(NUM_SHIELDS > 1){
+					NUM_SHIELDS--;
+					this.shieldActive = true;
+					this.shieldTimer = new ig.Timer();
+					this.shield = this.spawnEntity(EntityShield, this.player.pos.x, this.player.pos.y, {player:this.player})
+				}
 			}
 		}
 		if(this.shieldTimer){
@@ -154,8 +162,12 @@ EndlessMode = ig.Game.extend({
 		//Bomb
 		if(!this.bombLaunched){
 			if(ig.input.pressed("bomb")){
-				this.bombLaunched = true;
-				this.spawnEntity(EntityBomb, this.player.pos.x, this.player.pos.y)
+				if(NUM_BOMBS > 1){
+					NUM_BOMBS--;
+					this.bombLaunched = true;
+					this.spawnEntity(EntityBomb, this.player.pos.x, this.player.pos.y)
+				}
+				
 			}
 		}
 		
