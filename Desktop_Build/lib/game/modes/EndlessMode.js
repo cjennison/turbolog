@@ -11,6 +11,7 @@ ig.module(
 	'game.entities.player',
 	'game.entities.ui.healthbar',
 	'game.entities.ui.distancemeter',
+	'game.entities.powerup.powerup',
 	'game.entities.dynamictext.gametextcontroller',
 	'game.entities.controllers.enemycontroller',
 	'game.entities.enemies.zones.islandzone.sawbladey',
@@ -36,6 +37,10 @@ EndlessMode = ig.Game.extend({
 	money:0,
 	exp:0,
 	multiplier:1,
+	laserActive:false,
+	laser:null,
+	laserBeam:null,
+	laserTimer:null,
 	
 	enemyInitTimer:null,
 		
@@ -48,6 +53,9 @@ EndlessMode = ig.Game.extend({
         ig.input.bind(ig.KEY.UP_ARROW, 'up');
         ig.input.bind(ig.KEY.DOWN_ARROW, 'down');
         ig.input.bind(ig.KEY.Z, 'shoot');
+        
+        //Powerups
+        ig.input.bind(ig.KEY.L, 'laser');
 		
 		
 		this.enemyInitTimer = new ig.Timer();
@@ -90,8 +98,33 @@ EndlessMode = ig.Game.extend({
 				ig.system.setGame(EndScreen)
 			}
 		}
+		
+		
+		
+		
+		this.updatePowerups();
 		this.parent();
 		
+	},
+	
+	updatePowerups:function(){
+		if(!this.laserActive){
+			if(ig.input.pressed("laser")){
+				this.laserActive = true;
+				this.laserTimer = new ig.Timer();
+				this.laser = this.spawnEntity(EntityLaser, this.player.pos.x, this.player.pos.y, {player:this.player})
+				this.laserBeam = this.getEntitiesByType(EntityLaserBeam)[0];
+			}
+		}
+		
+		if(this.laserTimer){
+			if(this.laserTimer.delta() > laser_time){
+				this.laser.kill();
+				this.laserBeam.kill();
+				this.laserTimer = null;
+				this.laserActive = false;
+			}
+		}
 	},
 	
 	prepareToKillGame:function(){
@@ -110,7 +143,7 @@ EndlessMode = ig.Game.extend({
 	        	var aimg = new ig.Image('media/ui/AbilityBar.png');
 				aimg.draw(10,20, 0, 0, this.barWidth * this.player.ability, 25);
 	        }
-	         this.font.draw( 'Money: ' + this.money, 50, 50, ig.Font.ALIGN.CENTER );
+	        this.font.draw( 'Money: ' + this.money, 50, 50, ig.Font.ALIGN.CENTER );
 
 		}
 		

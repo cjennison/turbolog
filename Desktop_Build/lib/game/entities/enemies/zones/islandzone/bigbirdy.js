@@ -16,7 +16,7 @@ EntityBigBirdy = ig.Entity.extend({
 			
 			y_start: null,
 			flyState: "DOWN",
-			
+			health:1,
 			//collisions
 			type: ig.Entity.TYPE.B,
 			checkAgainst: ig.Entity.TYPE.A, //I hate goodies
