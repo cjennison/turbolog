@@ -7,6 +7,7 @@ ig.module(
 	'plugins.touch-button',
 	'plugins.zmagic',
     'plugins.analog-stick',
+    'plugins.savegame',
     'game.data.data',
 	'game.screens.endscreen', 
 	'game.entities.player',
@@ -25,8 +26,12 @@ ig.module(
 
 EndlessMode = ig.Game.extend({
 	
+	
+	
 	// Load a font
 	font: new ig.Font( 'media/04b03.font.png' ),
+	
+	//Objects
 	player:null,
 	flames:null,
 	healthbar:null,
@@ -43,21 +48,22 @@ EndlessMode = ig.Game.extend({
 	laserBeam:null,
 	laserTimer:null,
 	
+	//Shield
 	shieldActive:false,
 	shield:null,
 	shieldTimer:null,
 	
+	//Bomb
 	bombExploded:false,
 	bombTimer:null,
 	bombAlpha:0,
 	bombLaunched:false,
 
-	
+
 	enemyInitTimer:null,
 		
 	init: function() {
 		// Initialize your game here; bind keys etc.
-		
 		//Keys
 		ig.input.bind(ig.KEY.LEFT_ARROW, 'left');
         ig.input.bind(ig.KEY.RIGHT_ARROW, 'right');

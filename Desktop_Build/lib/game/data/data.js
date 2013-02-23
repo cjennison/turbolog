@@ -19,6 +19,8 @@ var TOTAL_MONEY = 0;
 var TOTAL_EXP = 0;
 var CURRENT_LEVEL = 0;
 
+var SAVEGAME;
+
 
 ig.module(
 	'game.data.data'
@@ -32,6 +34,11 @@ ig.Data = ig.Class.extend({
 	
 	test:"test",
 	
+	
+	
+	saveMoney:function(){
+		SAVEGAME.set('money', TOTAL_MONEY)
+	}
 	
 	
 })

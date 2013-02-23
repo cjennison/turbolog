@@ -4,7 +4,8 @@ ig.module(
 )
 .requires(
 	'impact.game',
-	'impact.font'
+	'impact.font',
+	'game.data.data'
 	
 )
 .defines(function(){
@@ -14,13 +15,17 @@ EndScreen = ig.Game.extend({
 	// Load a font
 	font: new ig.Font( 'media/04b03.font.png' ),
 	curMoney:0,
+	data:new ig.Data(),
 		
 	init: function() {
 		// Initialize your game here; bind keys etc.
 		curMoney = TOTAL_MONEY;
 		//Keys
 		ig.input.bind(ig.KEY.ENTER, 'start');
-     
+     	
+     	
+     	
+     	
 	},
 	
 	update: function() {
@@ -36,6 +41,7 @@ EndScreen = ig.Game.extend({
 			new_money--;
 			TOTAL_MONEY++;	
 		} else {
+			this.data.saveMoney();
 			if(ig.input.pressed("start")){
 				ig.system.setGame(EndlessMode);
 			}

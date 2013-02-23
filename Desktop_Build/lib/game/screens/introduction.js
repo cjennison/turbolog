@@ -5,11 +5,15 @@ ig.module(
 	'impact.game',
     'impact.sound',
     'impact.animation',
-	'impact.font'
+	'impact.font',
+	'game.data.data'
 )
 .defines(function(){
 
 Introduction = ig.Game.extend({
+	
+	//SaveGame
+	savegame:null,
 	
 	// Load a font
 	font: new ig.Font( 'media/04b03.font.png' ),
@@ -21,9 +25,20 @@ Introduction = ig.Game.extend({
 	RIn:true,
 	
 	RDone:false,
-	
+	data:new ig.Data(),
 	
 	init: function() {
+		//Load Player Data
+		this.savegame = new ig.Savegame(1);
+		SAVEGAME = this.savegame;
+		
+		TOTAL_MONEY = this.savegame.get('money');
+		console.log(TOTAL_MONEY)
+		if(TOTAL_MONEY == undefined){
+			TOTAL_MONEY = 0;
+		}
+		
+		
 		
         ig.input.bind(ig.KEY.ENTER, 'start');
         
