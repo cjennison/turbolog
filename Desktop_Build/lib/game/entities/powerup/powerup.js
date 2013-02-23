@@ -64,8 +64,11 @@ EntityLaserBeam = ig.Entity.extend({
 	},
 	
 	check:function(other){
-		other.health--;
-		other.sendHit();
+		if(other.name != "BOSS"){
+			other.health--;
+
+		}
+		other.sendHit(.1);
 	},
 	
 	draw:function(){

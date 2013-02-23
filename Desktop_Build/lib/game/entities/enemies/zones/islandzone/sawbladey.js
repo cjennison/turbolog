@@ -14,6 +14,9 @@ EntitySawBladey = ig.Entity.extend({
 	checkAgainst: ig.Entity.TYPE.A,
 	collides: ig.Entity.COLLIDES.PASSIVE,
 	
+	maxVel:{x:-300, y:100},
+	vel:{x:-90, y:0},
+	
 	animSheet: new ig.AnimationSheet('media/enemies/saw.png', 32, 32),
 	healthbar:null,
 	health:2,
@@ -29,7 +32,7 @@ EntitySawBladey = ig.Entity.extend({
 		
 	update:function(){
 		this.parent();
-		this.vel.x = -90;
+		
 		
 		if(ig.game.bombExploded){
 					this.kill();

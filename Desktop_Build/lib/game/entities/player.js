@@ -220,8 +220,11 @@ EntityBullet = ig.Entity.extend({
 			//Did i hit one of those type B things?
 			check: function( other ){
 				console.log("LOL");
-				other.health--;
-				other.sendHit();
+				if(other.name != "BOSS"){
+					other.health--;
+				}
+				
+				other.sendHit(5);
 				this.kill();
 			} 
 			

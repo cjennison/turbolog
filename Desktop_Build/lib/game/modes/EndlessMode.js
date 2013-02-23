@@ -12,6 +12,7 @@ ig.module(
 	'game.screens.endscreen', 
 	'game.entities.player',
 	'game.entities.ui.healthbar',
+    'game.entities.bosses.supersawblademan',
 	'game.entities.ui.distancemeter',
 	'game.entities.powerup.powerup',
 	'game.entities.dynamictext.gametextcontroller',
@@ -59,8 +60,14 @@ EndlessMode = ig.Game.extend({
 	bombAlpha:0,
 	bombLaunched:false,
 
-
+	enemyController:null,
 	enemyInitTimer:null,
+	
+	bossFight:false,
+	boss:null,
+	
+	gameWinTimer:null,
+	gameWinDelay: 10,
 		
 	init: function() {
 		// Initialize your game here; bind keys etc.
@@ -75,6 +82,9 @@ EndlessMode = ig.Game.extend({
         ig.input.bind(ig.KEY.L, 'laser');
         ig.input.bind(ig.KEY.K, 'shield');
 		ig.input.bind(ig.KEY.J, 'bomb');
+		
+		//Debug
+		ig.input.bind(ig.KEY.U, 'spawnboss');
 		
 		this.enemyInitTimer = new ig.Timer();
 		//Joystick
@@ -104,7 +114,7 @@ EndlessMode = ig.Game.extend({
 		this.distance+= .01;
 		if(this.enemyInitTimer){
 			if(this.enemyInitTimer.delta() > 4){
-				this.spawnEntity(EntityEnemyController, 0, 0);
+				this.enemyController = this.spawnEntity(EntityEnemyController, 0, 0);
 				this.enemyInitTimer = null;
 			}
 		}
@@ -115,6 +125,18 @@ EndlessMode = ig.Game.extend({
 				new_money = this.money;
 				new_exp = this.exp;
 				ig.system.setGame(EndScreen)
+			}
+		}
+		
+		if(ig.input.pressed('spawnboss')){
+			this.startBossBattle();
+		}
+		
+		if(this.gameWinTimer){
+			if(this.gameWinTimer.delta() > this.gameWinDelay){
+				new_money = this.money;
+				new_exp = this.exp;
+				ig.system.setGame(EndScreen);
 			}
 		}
 
@@ -184,6 +206,18 @@ EndlessMode = ig.Game.extend({
 				this.bombTimer = null;
 			}
 		}
+		
+	},
+	
+	startBossBattle:function(){
+		this.boss = this.spawnEntity(EntitySawBladeMan, ig.system.width, 30);
+		this.enemyController.kill();
+		this.bossFight = true;
+	},
+	
+	endBossBattle:function(){
+		this.gameWinTimer = new ig.Timer();
+		
 	},
 	
 	destroyAllEnemies:function(){
@@ -210,6 +244,11 @@ EndlessMode = ig.Game.extend({
 		}
 		
 		this.drawBomb();
+		
+		if(this.bossFight && this.boss && this.boss.health > 1){
+			var img = new ig.Image('media/ui/bossHealth.png');
+			img.draw(ig.system.width/2 - 90 ,150, 0, 0, this.boss.health/1.32, 50);
+		}
 		
 		if(ig.ua.mobile){
 			this.stickLeft.draw();
