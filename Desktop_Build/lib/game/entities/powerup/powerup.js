@@ -98,13 +98,13 @@ EntityShield = ig.Entity.extend({
 });
 
 EntityBomb = ig.Entity.extend({
-	size:{x:40, y:100},
+	size:{x:32, y:32},
 	gravityFactor:0,
 	animSheet: new ig.AnimationSheet('media/projectiles/bombthrow.png', 32, 32),
 	bombTimer:null,
 	bombExplodeTime: 5,
 	
-	
+	checkAgainst: ig.Entity.TYPE.B,
 	
 	
 	init:function(x,y,settings){
@@ -124,6 +124,19 @@ EntityBomb = ig.Entity.extend({
 			}
 		}
 	},
+	
+	check:function(other){
+		ig.game.destroyAllEnemies();
+		this.kill();
+	},
+	
+	kill:function(){
+		var player = ig.game.getEntitiesByType(EntityPlayer)[0];
+		if(this.distanceTo(player) < 100){
+			player.hurt(25);
+		}
+		this.parent();
+	}
 	
 });
 
