@@ -8,8 +8,8 @@ ig.module(
 .defines(function(){
 
 EntityPlayer = ig.Entity.extend({
-	size: {x:42, y:22},
-	
+	size: {x:32, y:22},
+	offSet: {x:0,y:10},
 	maxVel: {x:100, y:100},
 	friction: {x:100, y:100},
 	
@@ -138,13 +138,17 @@ EntityPlayer = ig.Entity.extend({
 	},
 	
 	hurt:function(amt){
+		if(ig.game.shieldActive){ return; }
 		this.health -= (amt - this.toughness);
 		if(this.health <= 0){
 			this.dying = true;
 			this.deathTimer = new ig.Timer();
 			ig.game.prepareToKillGame();
-			ig.game.getEntitiesByType(EntityEnemyController)[0].killController();
 			
+			var controller = ig.game.getEntitiesByType(EntityEnemyController)[0];
+			if(controller){
+				controller.killController();
+			}
 		}
 	}
 	

@@ -74,6 +74,57 @@ EntityLaserBeam = ig.Entity.extend({
 		var img = new ig.Image('media/projectiles/laserbeamimage.png');
 		img.draw(this.pos.x + 16, this.pos.y+5, 0, 0,800, 15);
 	}
-})
+});
+
+EntityShield = ig.Entity.extend({
+	size:{x:40, y:100},
+	gravityFactor:0,
+	animSheet: new ig.AnimationSheet('media/powerups/shield.png', 32, 32),
+	player:null,
+	
+	init:function(x,y,settings){
+		this.parent(x,y,settings);
+		this.addAnim('idle', 1, [0], true);
+	},
+	
+	update:function(){
+		this.parent();
+		if(this.player){
+			this.pos.x = this.player.pos.x + 15;
+			this.pos.y = this.player.pos.y - 4;
+		}
+	},
+	
+});
+
+EntityBomb = ig.Entity.extend({
+	size:{x:40, y:100},
+	gravityFactor:0,
+	animSheet: new ig.AnimationSheet('media/projectiles/bombthrow.png', 32, 32),
+	bombTimer:null,
+	bombExplodeTime: 5,
+	
+	
+	
+	
+	init:function(x,y,settings){
+		this.parent(x,y,settings);
+		this.addAnim('idle', .1, [0,1,2,3,4,5,6,7,8,9,10,11,12,13], false);
+		this.bombTimer = new ig.Timer();
+		
+	},
+	
+	update:function(){
+		this.parent();
+		this.vel.x = 50;
+		if(this.bombTimer){
+			if(this.bombTimer.delta() > this.bombExplodeTime){
+				ig.game.destroyAllEnemies();
+				this.kill();
+			}
+		}
+	},
+	
+});
 
 });

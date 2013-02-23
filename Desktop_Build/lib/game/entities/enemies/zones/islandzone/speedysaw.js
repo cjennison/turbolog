@@ -58,6 +58,10 @@ EntitySpeedySaw = ig.Entity.extend({
 			this.friction.y = 100000;
 			this.vel.x = -200;
 		}
+		
+		if(ig.game.bombExploded){
+					this.kill();
+				}
 	},
 	
 	check:function(other){

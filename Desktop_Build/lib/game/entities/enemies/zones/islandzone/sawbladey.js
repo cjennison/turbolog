@@ -30,6 +30,10 @@ EntitySawBladey = ig.Entity.extend({
 	update:function(){
 		this.parent();
 		this.vel.x = -90;
+		
+		if(ig.game.bombExploded){
+					this.kill();
+				}
 	},
 	
 	check:function(other){

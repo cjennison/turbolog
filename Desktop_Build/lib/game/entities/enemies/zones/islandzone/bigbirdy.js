@@ -51,6 +51,10 @@ EntityBigBirdy = ig.Entity.extend({
 						this.flyState = "DOWN";
 					}
 				}
+				
+				if(ig.game.bombExploded){
+					this.kill();
+				}
 
 				this.parent();
 			},

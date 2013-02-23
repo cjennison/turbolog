@@ -3,6 +3,7 @@ var GAME_TYPE = "STORY";
 //STATISTIC VARIABLES
 var magnetism = 1;
 var laser_time = 5;
+var shield_time = 5;
 
 //TEMPORARY VARIABLES
 var new_money = 0;
