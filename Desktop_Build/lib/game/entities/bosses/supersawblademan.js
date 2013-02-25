@@ -45,9 +45,9 @@ EntitySawBladeMan = ig.Entity.extend({
 		this.parent(x,y,settings);
 		console.log("SAW BOSS SPAWNED")
 		this.addAnim('idle', .1, [0,1,2,3,4]);
-		this.addAnim('spin', .03, [8,9,10,11,12,13,14,15,16,17,18,19, 20, 21,22,23,24,25,26,27,28]);
-		this.addAnim('fury', .05, [32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47]);
-		this.addAnim('dead', .6, [48,49,50,51,52,53,54,55,56,57]);
+		this.addAnim('spin', .03, [11,12,13,14,15]);
+		this.addAnim('fury', .05, [16,17,18,19,20,21,22,23,24,25,26,27,28, 29, 30]);
+		this.addAnim('dead', .6, [32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47]);
 	//this.healthbar = ig.game.spawnEntity(EntityHealthBar, 10, 10, {Unit:this});
 		this.stateChangeTimer = new ig.Timer();
 		this.deathTimer = new ig.Timer();
