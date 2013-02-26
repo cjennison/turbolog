@@ -21,6 +21,8 @@ var CURRENT_LEVEL = 0;
 
 var SAVEGAME;
 
+//CURRENT BUILD
+var VERSION = .1;
 
 ig.module(
 	'game.data.data'

@@ -16,6 +16,13 @@ MainMenu = ig.Game.extend({
 	font: new ig.Font( 'media/04b03.font.png' ),
 	logo: new ig.Image('media/screens/splash/logo.png'),
 	background: new ig.Image('media/zones/islandzone.png'),
+	
+	storybtn: new ig.Image('media/screens/mainmenu/storymode.png'),
+	endbtn: new ig.Image('media/screens/mainmenu/endlessmode.png'),
+	chalbtn: new ig.Image('media/screens/mainmenu/challengemode.png'),
+	mylog: new ig.Image('media/screens/mainmenu/mylog.png'),
+	opts: new ig.Image('media/screens/mainmenu/options.png'),
+
 	bgX:0,
 		
 	init: function() {
@@ -28,7 +35,7 @@ MainMenu = ig.Game.extend({
 	
 	update: function() {
 		if(ig.input.pressed("start")){
-			ig.system.setGame(EndlessMode);
+			ig.system.setGame(Map);
 		}
 		
 		this.bgX -= .3;
@@ -44,9 +51,15 @@ MainMenu = ig.Game.extend({
 		var x = ig.system.width/2,
 			y = ig.system.height/2;
 		this.background.draw(this.bgX, 0);
-		this.logo.draw(x - this.logo.width/2, 30);
-			
-		this.font.draw( 'Press Enter to Start Trial Mode', ig.system.width/2, 160, ig.Font.ALIGN.CENTER );
+		this.logo.draw(x - this.logo.width/2, 00);
+		
+		this.storybtn.draw(0, 100);
+		this.endbtn.draw(x - 50, 100);
+		this.chalbtn.draw(ig.system.width - 100, 100);
+		this.mylog.draw(x - 100, ig.system.height-40);
+		this.opts.draw(ig.system.width - 70, ig.system.height - 40)
+		this.font.draw("VERSION: " + VERSION, 3, 3);
+		this.font.draw( 'Press Enter to Start Trial Mode', ig.system.width/2, 195, ig.Font.ALIGN.CENTER );
 
 		
 	}

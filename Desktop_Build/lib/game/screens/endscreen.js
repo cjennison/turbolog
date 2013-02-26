@@ -22,10 +22,7 @@ EndScreen = ig.Game.extend({
 		curMoney = TOTAL_MONEY;
 		//Keys
 		ig.input.bind(ig.KEY.ENTER, 'start');
-     	
-     	
-     	
-     	
+
 	},
 	
 	update: function() {
@@ -43,7 +40,7 @@ EndScreen = ig.Game.extend({
 		} else {
 			this.data.saveMoney();
 			if(ig.input.pressed("start")){
-				ig.system.setGame(EndlessMode);
+				ig.system.setGame(MainMenu);
 			}
 		}
 		

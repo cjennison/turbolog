@@ -8,6 +8,8 @@ ig.module(
 	'impact.font',
 	'game.screens.mainmenu',
 	'game.screens.introduction',
+	'game.screens.map',
+
 	'game.modes.endlessmode'
 )
 .defines(function(){
