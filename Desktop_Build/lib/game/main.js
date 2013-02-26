@@ -9,7 +9,7 @@ ig.module(
 	'game.screens.mainmenu',
 	'game.screens.introduction',
 	'game.screens.map',
-
+	'game.screens.cinematics',
 	'game.modes.endlessmode'
 )
 .defines(function(){

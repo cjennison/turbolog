@@ -35,7 +35,7 @@ MainMenu = ig.Game.extend({
 	
 	update: function() {
 		if(ig.input.pressed("start")){
-			ig.system.setGame(Map);
+			ig.system.setGame(StoryIntroduction);
 		}
 		
 		this.bgX -= .3;
