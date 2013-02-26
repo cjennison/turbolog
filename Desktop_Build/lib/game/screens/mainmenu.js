@@ -45,6 +45,9 @@ MainMenu = ig.Game.extend({
 		}
 		
 		this.bgX -= .3;
+		if(this.bgX < -1400){
+			this.bgX = 0;
+		}
 		this.parent();
 	},
 	
