@@ -24,6 +24,9 @@ var SAVEGAME;
 //CURRENT BUILD
 var VERSION = .1;
 
+//NAV VARS
+var SAW_FIRST_CINEMATIC = false;
+
 ig.module(
 	'game.data.data'
 )

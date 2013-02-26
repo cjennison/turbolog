@@ -35,7 +35,13 @@ MainMenu = ig.Game.extend({
 	
 	update: function() {
 		if(ig.input.pressed("start")){
-			ig.system.setGame(StoryIntroduction);
+			if(SAW_FIRST_CINEMATIC == false){
+				ig.system.setGame(StoryIntroduction);
+				SAW_FIRST_CINEMATIC = true;
+			}else {
+				ig.system.setGame(Map);
+
+			}
 		}
 		
 		this.bgX -= .3;
