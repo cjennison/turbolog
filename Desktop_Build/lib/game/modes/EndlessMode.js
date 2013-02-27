@@ -35,7 +35,7 @@ EndlessMode = ig.Game.extend({
 	
 	transitioning:false,
 	transitionTarget:"none",
-	transitionTimer:new ig.Timer(),
+	transitionTimer:null,
 	
 	//Objects
 	player:null,
@@ -75,6 +75,8 @@ EndlessMode = ig.Game.extend({
 	gameWinDelay: 10,
 		
 	init: function() {
+		this.transitionTimer = new ig.Timer();
+
 		// Initialize your game here; bind keys etc.
 		//Keys
 		ig.input.bind(ig.KEY.LEFT_ARROW, 'left');
@@ -245,6 +247,7 @@ EndlessMode = ig.Game.extend({
 		this.boss = this.spawnEntity(EntitySawBladeMan, ig.system.width, 30);
 		this.enemyController.kill();
 		this.bossFight = true;
+		this.transitionTimer == null
 	},
 	
 	endBossBattle:function(){

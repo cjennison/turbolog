@@ -22,7 +22,7 @@ EntityIslandZone = ig.Entity.extend({
 	update:function(){
 		this.parent();
 		this.vel.x = -70;
-		
+		/*
 		if(ig.game.transitioning){
 			if(ig.game.transitionTarget == "UNDERWATER"){
 				if(this.pos.y > 90){
@@ -56,6 +56,7 @@ EntityIslandZone = ig.Entity.extend({
 			}
 			
 		}
+		*/
 		
 		
 		if(this.pos.x < -this.size.x + ig.system.width){
