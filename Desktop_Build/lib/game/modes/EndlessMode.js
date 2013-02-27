@@ -20,6 +20,7 @@ ig.module(
 	'game.entities.enemies.zones.islandzone.sawbladey',
 	'game.entities.enemies.zones.islandzone.bigbirdy',
 	'game.entities.enemies.zones.islandzone.speedysaw',
+	'game.entities.zones.islandzone_fore',
 
 	'game.entities.zones.islandzone'
 )
@@ -31,6 +32,10 @@ EndlessMode = ig.Game.extend({
 	
 	// Load a font
 	font: new ig.Font( 'media/04b03.font.png' ),
+	
+	transitioning:false,
+	transitionTarget:"none",
+	transitionTimer:new ig.Timer(),
 	
 	//Objects
 	player:null,
@@ -100,13 +105,16 @@ EndlessMode = ig.Game.extend({
 		console.log(data.test)
 		//Init Entities
 		this.spawnEntity(EntityIslandZone, 0, 0)
+		this.spawnEntity(EntityIslandZoneForeground, 0, 230)
+
 		this.flames = this.spawnEntity(EntityFlames, 40, ig.system.height/2);
 		this.player = this.spawnEntity(EntityPlayer, 40, ig.system.height/2);
 		//this.healthbar = this.spawnEntity(EntityHealthBar, 10, 10, {Unit:this.player});
 		this.distancemeter = this.spawnEntity(EntityDistanceMeter, 0, 200)
 		this.spawnEntity(EntityIslandZoneText, -200, 100)
 		
-		
+		this.transitionTimer.reset();
+
 	},
 	
 	update: function() {
@@ -139,12 +147,36 @@ EndlessMode = ig.Game.extend({
 				ig.system.setGame(EndScreen);
 			}
 		}
-
+		this.transitions();
 		this.updatePowerups();
 		this.parent();
 		
 	},
 	
+	
+	transitions:function(){
+		if(this.transitionTimer == null){return};
+		if(this.transitionTimer.delta() > 30){
+			this.transitioning = true;
+			this.transitionTarget = this.getTransition();
+			console.log(this.transitionTarget)
+			this.transitionTimer.reset();
+			
+		}
+	},
+	
+	getTransition:function(){
+				var rand = Math.random();
+				if(rand < .3){
+					return("SKY");
+				}
+				else if(rand >= .3 && rand < .6){
+					return("SEALEVEL");
+				} else {
+					return("UNDERWATER");
+				}
+			},
+			
 	updatePowerups:function(){
 		//Laser
 		if(!this.laserActive){

@@ -8,8 +8,8 @@ ig.module(
 .defines(function(){
 
 EntityPlayer = ig.Entity.extend({
-	size: {x:32, y:8},
-	offSet: {x:0,y:20},
+	size: {x:32, y:12},
+	offset: {x:0,y:8},
 	maxVel: {x:100, y:100},
 	friction: {x:100, y:100},
 	
@@ -44,7 +44,7 @@ EntityPlayer = ig.Entity.extend({
 		var flame = ig.game.getEntitiesByType(EntityFlames)[0];
 		if(flame){
 			flame.pos.x = this.pos.x - 16;
-			flame.pos.y = this.pos.y + 0;
+			flame.pos.y = this.pos.y - 8;
 		}
 		
 		

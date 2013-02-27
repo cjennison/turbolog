@@ -15,7 +15,7 @@ MainMenu = ig.Game.extend({
 	// Load a font
 	font: new ig.Font( 'media/04b03.font.png' ),
 	logo: new ig.Image('media/screens/splash/logo.png'),
-	background: new ig.Image('media/zones/islandzone.png'),
+	background: new ig.Image('media/zones/islandzone_skylayer.png'),
 	
 	storybtn: new ig.Image('media/screens/mainmenu/storymode.png'),
 	endbtn: new ig.Image('media/screens/mainmenu/endlessmode.png'),
