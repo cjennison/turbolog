@@ -31,6 +31,7 @@ EntityIslandZoneForeground = ig.Entity.extend({
 				}
 				if(this.pos.y < 0 ){
 					this.vel.y = 0;
+					this.sendTransitionDone();
 				}
 			}
 			if(ig.game.transitionTarget == "SEALEVEL"){
@@ -44,6 +45,7 @@ EntityIslandZoneForeground = ig.Entity.extend({
 				
 				if(this.pos.y < 170 && this.pos.y > 160){
 					this.vel.y = 0;
+					this.sendTransitionDone();
 				}
 				
 			}
@@ -53,6 +55,7 @@ EntityIslandZoneForeground = ig.Entity.extend({
 				}
 				if(this.pos.y > 300 ){
 					this.vel.y = 0;
+					this.sendTransitionDone();
 				}
 			}
 			
@@ -66,6 +69,10 @@ EntityIslandZoneForeground = ig.Entity.extend({
 			this.pos.x = 0;
 		}
 	},
+	
+	sendTransitionDone: function(){
+		ig.game.transitioning = false;
+	}
 		
 
 });

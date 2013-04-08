@@ -30,6 +30,8 @@ ig.module(
 
         update: function () {
             this.parent();
+            
+            if(ig.game.transitioning){ return }
 
             if (this.sawBladeyTimer.delta() > 2) {
                 var yPos = Math.random() * ig.system.height - 30;

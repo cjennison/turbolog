@@ -157,7 +157,7 @@ EndlessMode = ig.Game.extend({
 	
 	
 	transitions:function(){
-		if(this.transitionTimer == null){return};
+		if(this.transitionTimer == null || this.bossFight){return};
 		if(this.transitionTimer.delta() > 30){
 			this.transitioning = true;
 			this.transitionTarget = this.getTransition();
