@@ -1,7 +1,7 @@
 //Add Game requirements
 // Load the game
-ejecta.require('lib/impact/impact.js');
-ejecta.require('lib/game/main.js');
+ejecta.include('lib/impact/impact.js');
+ejecta.include('lib/game/main.js');
 
 
 

@@ -88,7 +88,7 @@ ig.module(
                 'game.game-debug'
             )
             .requires(
-                'plusplus.debug.debug'
+                //'plusplus.debug.debug'
             )
             .defines(function () {
                 start();
