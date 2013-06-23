@@ -55,7 +55,7 @@ EntitySawBladeMan = ig.Entity.extend({
 		
 	update:function(){
 		this.parent();
-		
+		console.log("UPD")
 		if(this.State.DEAD){
 			this.currentAnim = this.anims.dead;
 			this.accel.x = 0;
