@@ -17,6 +17,11 @@ ig.module(
          * @namespace ig.CONFIG_USER
          * @author Collin Hover - collinhover.com
          **/
-        ig.CONFIG_USER = {};
+        ig.CONFIG_USER = {
+			
+			// make it bigger!
+			SCALE: 1
+			
+		};
 
     });
