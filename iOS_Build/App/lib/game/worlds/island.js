@@ -7,18 +7,21 @@ ig.module(
     'plusplus.core.game',
     'plusplus.core.layer',
     'plusplus.entities.light',
+    
+    'turbolog.level',
 	
 	'impact.font',
 	'plugins.touch-button',
 	'plugins.button',
 	'game.entities.player',
 	'game.entities.spike',
-	'game.entities.background.island-bg',
-	'game.levels.test'
+	'game.entities.background.IslandBackground'
 )
 .defines(function(){
-	island = ig.GameExtended.extend({
-		background: null,
+	WorldIsland = ig.TurboLevel.extend({
+		
+		//Level Variables
+		
 		
 		shapesPasses: [
 			{
@@ -28,17 +31,22 @@ ig.module(
 		],
 		init:function(){
 			this.parent();
-			this.loadLevel(ig.global.LevelTest);
-			//this.camera.addAtmosphere(100, {r:0,g:0,b:0, a:.1});
-			this.background = this.spawnEntity(EntityIslandBackground,0,0)
-			//var light = ig.game.spawnEntity(ig.EntityLight, 0, 0);
-			//light.radius = 60;
+			
+			//Add background (includes foreground)		
+			this.addBackground(EntityIslandBackground);
 
+			//this.loadLevel(ig.global.LevelTest);
+			//this.camera.addAtmosphere(100, {r:0,g:0,b:0, a:.1});
+		},
+		
+		createBackground:function(){
+			
 		},
 		
 		
 		update:function(){
 			this.parent();
+			
 			
 			
 		},
@@ -54,3 +62,10 @@ ig.module(
 	})
 	
 });
+
+
+function Clamp(num, max, min){
+	if(num > max){num = max}
+	if(num < min){num = min}
+	return num;
+}

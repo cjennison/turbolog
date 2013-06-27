@@ -66,7 +66,7 @@ ig.module(
             	
             	if(ig.input.pressed('GAME')){
             		console.log("INITIALIZING GAME")
-            		ig.system.setGame(island);
+            		ig.system.setGame(WorldIsland);
 
             	}
             	

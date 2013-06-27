@@ -7,6 +7,8 @@ ig.module(
 )
 .defines(function(){
  
+ 
+ 
 EntityIslandZone = ig.Entity.extend({
 	size: {x:2000, y:240},
 	maxVel:{x:-300, y:50},

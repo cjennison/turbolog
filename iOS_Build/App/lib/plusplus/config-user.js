@@ -20,8 +20,14 @@ ig.module(
         ig.CONFIG_USER = {
 			
 			// make it bigger!
-			SCALE: 1
+			SCALE: 1,
+			
+			// speeds
+			MAX_SPEED: 100,
+			MIN_SPEED: 0,
 			
 		};
+		
+		
 
     });
