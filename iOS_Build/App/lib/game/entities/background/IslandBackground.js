@@ -114,13 +114,14 @@ ig.module(
 			}
 		},
 			//maxVel:{x:-100, y:0},
-			zIndex:3,
+			zIndex:10,
 			size: {x:2000, y:240},
 
 		init:function(x,y,settings){
 			this.parent(x,y,settings);
 			console.log("LOADED")
 			this.maxVel.y = 0;
+			this.alpha = .5;
 		},
 		
 		update:function(){

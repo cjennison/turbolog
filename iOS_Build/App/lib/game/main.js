@@ -99,6 +99,7 @@ ig.module(
         // our game and config settings
        		
 		//ig.main('#canvas', MyGame, 60, width, height, 1);
+		ig.System.drawMode = ig.System.DRAW.SUBPIXEL;
         ig.main(
             '#canvas',
             game,

@@ -35,7 +35,10 @@ ig.module(
 			
 			//Add background (includes foreground)		
 			this.addBackground(EntityIslandBackground);
-			this.spawnEntity(EntityTurboLog, 50, ig.system.height/2 );
+			this.turbolog = this.spawnEntity(EntityTurboLog, 50, ig.system.height/2 );
+			this.sortEntitiesDeferred();
+			
+			//this.camera.follow(this.turbolog, true)
 			//this.loadLevel(ig.global.LevelTest);
 			//this.camera.addAtmosphere(100, {r:0,g:0,b:0, a:.1});
 		},
@@ -46,8 +49,9 @@ ig.module(
 		update:function(){
 			this.parent();
 			
-			
-			
+			var y = this.turbolog.pos.y - (ig.system.height / 2);
+			this.screen.y = (y > 0 && y < ig.system.height) ? y : this.screen.y;
+			//console.log(this.screen.y)
 		},
 		
 		

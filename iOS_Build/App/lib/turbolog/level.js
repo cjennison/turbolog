@@ -28,6 +28,7 @@ ig.module(
 		
 		movementSpeed:1,
 		background: null,
+		turbolog:null,
 		
 		buttons:[],
 		
@@ -47,18 +48,20 @@ ig.module(
        	 	
        	 	ig.input.bind(ig.KEY.UP_ARROW, 'up')
        	 	ig.input.bind(ig.KEY.DOWN_ARROW, 'down');
+            
+            ig.input.bind(ig.KEY.F, 'shoot');
        	 	
        	 	//UI
-       	 	var baseSize = 50;
+       	 	var baseSize = 60;
 	   	    var stickSize = 20;
-	        var margin = 10;
+	        var margin = 20;
 	        var y = ig.system.height - baseSize - margin;
 	        var x1 = baseSize + margin;
 	        this.stickLeft = new ig.AnalogStick( x1, y, baseSize, stickSize );                      
 	        
 	        this.buttons = [
-	                	new ig.TouchButton('shoot', ig.system.width - 48,  ig.system.height - 48, 40, 48, new ig.Image('/media/ui/start_button.png'), 0)
-	                ]  
+	        	new ig.TouchButton('shoot', ig.system.width - 70,  ig.system.height - 70, 64, 64, new ig.Image('/media/ui/gameplay/button_shoot_fire.png'), 0)
+	        ]  
        	 	
 		},
 		
