@@ -22,10 +22,10 @@ ig.module(
 				sequence: [0]
 			}
 		},
-			//maxVel:{x:-100, y:0},
+		//maxVel:{x:-100, y:0},
 
-			size: {x:2000, y:240},
-			zIndex:1,
+		size: {x:2000, y:240},
+		zIndex:1,
 
 		init:function(x,y,settings){
 			this.parent(x,y,settings);
@@ -115,7 +115,6 @@ ig.module(
 		},
 			//maxVel:{x:-100, y:0},
 			zIndex:3,
-
 			size: {x:2000, y:240},
 
 		init:function(x,y,settings){

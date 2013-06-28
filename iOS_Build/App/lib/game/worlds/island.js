@@ -15,7 +15,8 @@ ig.module(
 	'plugins.button',
 	'game.entities.player',
 	'game.entities.spike',
-	'game.entities.background.IslandBackground'
+	'game.entities.background.IslandBackground',
+	'game.entities.characters.TurboLog'
 )
 .defines(function(){
 	WorldIsland = ig.TurboLevel.extend({
@@ -34,14 +35,12 @@ ig.module(
 			
 			//Add background (includes foreground)		
 			this.addBackground(EntityIslandBackground);
-
+			this.spawnEntity(EntityTurboLog, 50, ig.system.height/2 );
 			//this.loadLevel(ig.global.LevelTest);
 			//this.camera.addAtmosphere(100, {r:0,g:0,b:0, a:.1});
 		},
 		
-		createBackground:function(){
-			
-		},
+		
 		
 		
 		update:function(){

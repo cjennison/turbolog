@@ -10,7 +10,8 @@ ig.module(
 	
 	'impact.font',
 	'plugins.touch-button',
-	'plugins.button'
+	'plugins.button',
+	'plugins.analog-stick'
 )
 .defines(function(){
 	
@@ -43,7 +44,17 @@ ig.module(
        	 	ig.input.bind(ig.KEY.RIGHT_ARROW, 'fast');
        	 	
        	 	ig.input.bind(ig.KEY.UP_ARROW, 'up')
-       	 	ig.input.bind(ig.KEY.DOWN_ARROW, 'down')
+       	 	ig.input.bind(ig.KEY.DOWN_ARROW, 'down');
+       	 	
+       	 	var baseSize = 50;
+	   	    var stickSize = 20;
+	        var margin = 10;
+	        var y = ig.system.height - baseSize - margin;
+	        var x1 = baseSize + margin;
+	
+	        this.stickLeft = new ig.AnalogStick( x1, y, baseSize, stickSize );                      
+	        
+       	 	
 		},
 		
 		update:function(){
@@ -67,7 +78,8 @@ ig.module(
 		
 		draw:function(){
 			this.parent();
-			
+			        this.stickLeft.draw();
+
 			
 		}
 		
