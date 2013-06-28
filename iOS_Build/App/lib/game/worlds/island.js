@@ -63,8 +63,3 @@ ig.module(
 });
 
 
-function Clamp(num, max, min){
-	if(num > max){num = max}
-	if(num < min){num = min}
-	return num;
-}

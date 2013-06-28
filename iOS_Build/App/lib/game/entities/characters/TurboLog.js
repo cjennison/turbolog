@@ -93,6 +93,10 @@ ig.module(
 			} else {
 				this.currentAnim = this.anims.idle;
 			}
+			
+			this.pos.x = Clamp(this.pos.x, ig.system.width, 0);
+			this.pos.y = Clamp(this.pos.y, ig.system.height - this.size.y, 0);
+			
 		}
 	
 	})
