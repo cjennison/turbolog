@@ -41,6 +41,9 @@ ig.module(
 			
        	 	ig.input.bind(ig.KEY.LEFT_ARROW, 'slow');
        	 	ig.input.bind(ig.KEY.RIGHT_ARROW, 'fast');
+       	 	
+       	 	ig.input.bind(ig.KEY.UP_ARROW, 'up')
+       	 	ig.input.bind(ig.KEY.DOWN_ARROW, 'down')
 		},
 		
 		update:function(){
