@@ -33,8 +33,8 @@ ig.module(
 			this.maxVel.y = 0;
 			this.alpha = .4;
 			
-			ig.game.spawnEntity(EntityIslandForeground,0,0)
-			ig.game.spawnEntity(EntityIslandFrontground,0,200)
+			ig.game.foreground = ig.game.spawnEntity(EntityIslandForeground,0,0)
+			ig.game.frontgroud = ig.game.spawnEntity(EntityIslandFrontground,0,200)
 
 		},
 		

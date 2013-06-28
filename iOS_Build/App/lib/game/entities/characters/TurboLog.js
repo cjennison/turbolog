@@ -23,7 +23,13 @@ ig.module(
 		endY:null,
 		threshold:150,
 		dashing:false,
-		dash_dir:null,		
+		dash_dir:null,
+		
+		//Log Variables
+		health:100,
+		magic:100,
+		dying:false,
+				
 		//Animsheet
 		animSheet: new ig.AnimationSheet(_c.PATH_TO_MEDIA + 'game_elements/logs/turbolog.png', 32, 32 ),
 		animSettings:{
@@ -107,8 +113,15 @@ ig.module(
 			
 			this.determineRotation();		
 			
+			
+			if(this.magic < 100){
+				this.magic += .01;
+			}
+			
+			
 			//Check for firing
-			if(ig.input.pressed("shoot")){
+			if(ig.input.pressed("shoot") && this.magic > 1){
+				this.magic--;
 				ig.game.spawnEntity(EntityFirebolt, this.pos.x + this.size.x, this.pos.y + this.size.y/2 - 3)
 				ig.game.sortEntitiesDeferred();
 			}
@@ -118,10 +131,13 @@ ig.module(
 		touchStart:function(ev){
 			console.log(ig.system.width/2)
 			ev.preventDefault();
-			//console.log("START: " + ev.touches[0].pageX)
-			if(ev.touches[0].pageX > ig.system.width/2){
+			
+			if(this.dashing){return;}
+			console.log("START: " + ev.touches[0].pageX)
+			if(ev.touches[0].pageX > ig.system.width/2 && ev.touches[0].pageY < ig.system.height - 60){
 				this.startY = ev.touches[0].pageY;
-				console.log("GRATER")
+			} else {
+				this.starty = null;
 			}
 			
 		},
@@ -136,10 +152,11 @@ ig.module(
 		
 		touchEnd:function(ev){
 			ev.preventDefault();
-			if(!this.startY){return;}
+			if(!this.startY || this.dashing){ return; }
 			if(this.startY < this.endY - this.threshold){
 				console.log("DASH DOWN")
 				this.startY = null;
+				this.endY = null;
 				this.dashing = true;
 				this.vel.y = 500;
 				this.dash_dir = "down";
@@ -148,6 +165,7 @@ ig.module(
 			} else if(this.startY > this.endY + this.threshold){
 				console.log("DASH DOWN")
 				this.startY = null;
+				this.endY = null;
 				this.dashing = true;
 				this.vel.y = -500;
 				this.dash_dir = "up";
@@ -182,6 +200,7 @@ ig.module(
 	
 	})
 	
+	//PROJECTILES
 	EntityFirebolt = ig.EntityExtended.extend({
 		performance: _c.KINEMATIC,
 		size: {x:10,y:5},
@@ -204,6 +223,31 @@ ig.module(
 		update:function(){
 			this.parent();
 			this.pos.x += 5;
+		}
+	})
+	
+	//EFFECTS
+	EntityFlames = ig.EntityExtended.extend({
+		performance: _c.KINEMATIC,
+		size:{x:64, y:32},
+		animSheet: new ig.AnimationSheet('media/game_elements/logs/effects/flames.png', 64, 32),
+		animSettings: {
+			idle: {
+				name:"idle",
+				frameTime:0.1,
+				sequence:[0,1,2,3,4]
+			},
+			up:{
+				name:'up',
+				frameTime:0.1,
+				sequence: [5,6,7,8,9]
+			},
+			down:{
+				name:'down',
+				frameTime:0.1,
+				sequence [10,11,12,13,14]
+			}
+			
 		}
 	})
 })

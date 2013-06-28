@@ -28,9 +28,13 @@ ig.module(
 		
 		movementSpeed:1,
 		background: null,
+		foreground:null,
+		frontground:null,
 		turbolog:null,
 		
 		buttons:[],
+			barWidth: 1.8,
+
 		
 		shapesPasses: [
 			{
@@ -86,10 +90,24 @@ ig.module(
 		
 		draw:function(){
 			this.parent();
+			
+			//buttons
 			this.stickLeft.draw();
 			for(var i = 0;i < this.buttons.length;i++){
 				this.buttons[i].draw();
 			}
+			
+			//bars
+			if(this.turbolog && this.turbolog.dying == false){
+				var img = new ig.Image('media/ui/gameplay/ui_healthbar.png');
+				img.draw(10,1, 0, 0, this.barWidth * this.turbolog.health, 25);	        
+		        if(this.turbolog.magic > 0){
+		        	var aimg = new ig.Image('media/ui/gameplay/ui_magicbar.png');
+					aimg.draw(10,20, 0, 0, this.barWidth * this.turbolog.magic, 25);
+		        }
+		       // this.font.draw( 'Money: ' + this.money, 50, 50, ig.Font.ALIGN.CENTER );
+			}
+			
 			
 		}
 		
