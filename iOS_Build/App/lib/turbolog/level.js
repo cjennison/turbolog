@@ -29,6 +29,8 @@ ig.module(
 		movementSpeed:1,
 		background: null,
 		
+		buttons:[],
+		
 		shapesPasses: [
 			{
 				ignoreClimbable: true,
@@ -46,14 +48,17 @@ ig.module(
        	 	ig.input.bind(ig.KEY.UP_ARROW, 'up')
        	 	ig.input.bind(ig.KEY.DOWN_ARROW, 'down');
        	 	
+       	 	//UI
        	 	var baseSize = 50;
 	   	    var stickSize = 20;
 	        var margin = 10;
 	        var y = ig.system.height - baseSize - margin;
 	        var x1 = baseSize + margin;
-	
 	        this.stickLeft = new ig.AnalogStick( x1, y, baseSize, stickSize );                      
 	        
+	        this.buttons = [
+	                	new ig.TouchButton('shoot', ig.system.width - 48,  ig.system.height - 48, 40, 48, new ig.Image('/media/ui/start_button.png'), 0)
+	                ]  
        	 	
 		},
 		
@@ -78,8 +83,10 @@ ig.module(
 		
 		draw:function(){
 			this.parent();
-			        this.stickLeft.draw();
-
+			this.stickLeft.draw();
+			for(var i = 0;i < this.buttons.length;i++){
+				this.buttons[i].draw();
+			}
 			
 		}
 		

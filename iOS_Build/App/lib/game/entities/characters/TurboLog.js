@@ -15,7 +15,7 @@ ig.module(
 		//
 		size: {x:32, y:32},
 		zIndex:4,
-		accelModulator:{x:130, y:70},
+		accelModulator:{x:130, y:110},
 		
 		//Animsheet
 		animSheet: new ig.AnimationSheet(_c.PATH_TO_MEDIA + 'game_elements/logs/turbolog.png', 32, 32 ),
@@ -66,8 +66,13 @@ ig.module(
 		
 		update:function(){
 			this.parent();
+			//Set velocity
 			this.vel.x = ig.game.stickLeft.input.x * this.accelModulator.x;
         	this.vel.y = ig.game.stickLeft.input.y * this.accelModulator.y;
+			
+			//Clamp Position
+			this.pos.x = Clamp(this.pos.x, ig.system.width - this.size.x, 0);
+			this.pos.y = Clamp(this.pos.y, ig.system.height - this.size.y, 0);
 			
 			this.determineRotation();			
 		},
@@ -94,8 +99,6 @@ ig.module(
 				this.currentAnim = this.anims.idle;
 			}
 			
-			this.pos.x = Clamp(this.pos.x, ig.system.width, 0);
-			this.pos.y = Clamp(this.pos.y, ig.system.height - this.size.y, 0);
 			
 		}
 	
