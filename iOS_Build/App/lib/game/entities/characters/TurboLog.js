@@ -21,8 +21,40 @@ ig.module(
 		animSheet: new ig.AnimationSheet(_c.PATH_TO_MEDIA + 'game_elements/logs/turbolog.png', 32, 32 ),
 		animSettings:{
 			idle: {
+				name:"idle",
 				frameTime: 1,
 				sequence: [6]
+			},
+			
+			up_one: {
+				name:"up_one",
+				frameTime: 1,
+				sequence: [0]
+			},
+			up_two: {
+				name:"up_two",
+				frameTime: 1,
+				sequence: [1]
+			},
+			up_three: {
+				name:"up_three",
+				frameTime: 1,
+				sequence: [2]
+			},
+			down_one: {
+				name:"down_one",
+				frameTime: 1,
+				sequence: [3]
+			},
+			down_two: {
+				name:"down_two",
+				frameTime: 1,
+				sequence: [4]
+			},
+			down_three: {
+				name:"down_three",
+				frameTime: 1,
+				sequence: [5]
 			}
 		},
 		
@@ -36,7 +68,31 @@ ig.module(
 			this.parent();
 			this.vel.x = ig.game.stickLeft.input.x * this.accelModulator.x;
         	this.vel.y = ig.game.stickLeft.input.y * this.accelModulator.y;
+			
+			this.determineRotation();			
+		},
 		
+		determineRotation:function(){
+			if(this.vel.y > 50){
+				this.currentAnim = this.anims.down_three;
+			}
+			else if(this.vel.y <= 50 && this.vel.y > 20){
+				this.currentAnim = this.anims.down_two;
+			}
+			else if(this.vel.y <= 20 && this.vel.y > 0){
+				this.currentAnim = this.anims.down_one;
+			}
+			else if(this.vel.y <= 0 && this.vel.y > -20){
+				this.currentAnim = this.anims.up_one;
+			}
+			else if(this.vel.y <= -20 && this.vel.y > -50){
+				this.currentAnim = this.anims.up_two;
+			}
+			else if(this.vel.y <= 50){
+				this.currentAnim = this.anims.up_three;
+			} else {
+				this.currentAnim = this.anims.idle;
+			}
 		}
 	
 	})
