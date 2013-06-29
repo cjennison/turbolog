@@ -26,6 +26,25 @@ ig.module(
 			MAX_SPEED: 100,
 			MIN_SPEED: 0,
 			
+			//Money
+			MONEY:0,
+			
+			//Experience
+			EXP:0,
+			
+			//Player Level
+			LEVEL:1,
+			
+			//Level of Item Magnetism
+			MAGNETISM:1,
+			
+			//////////   FIRE TREE   /////////
+			
+			
+			//////////   EARTH TREE   /////////
+			
+			
+			//////////   AIR TREE   /////////
 		};
 		
 		

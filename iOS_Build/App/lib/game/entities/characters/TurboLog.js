@@ -10,9 +10,12 @@ ig.module(
 	
 	//Base Turbo Log - Needs to be extended
 	EntityTurboLog = ig.EntityExtended.extend({
+		type: ig.Entity.TYPE.A, 
+		checkAgainst: ig.Entity.TYPE.B,
+		collides: ig.Entity.COLLIDES.PASSIVE,
 		performance: _c.KINEMATIC,
 		maxVel:{x:500, y:2000},
-		//
+
 		size: {x:32, y:32},
 		accelModulator:{x:200, y:170},
 		zIndex:5,
@@ -193,6 +196,11 @@ ig.module(
 			}
 			
 			
+		},
+		
+		hurt:function(amt){
+			this.health -= (amt);
+			//this.dying = true;
 		}
 	
 	})
@@ -200,6 +208,9 @@ ig.module(
 	//PROJECTILES
 	EntityFirebolt = ig.EntityExtended.extend({
 		performance: _c.KINEMATIC,
+		type: ig.Entity.TYPE.NONE,
+			checkAgainst: ig.Entity.TYPE.B, //I hate baddies
+			collides: ig.Entity.COLLIDES.PASSIVE,
 		size: {x:10,y:5},
 		animSheet: new ig.AnimationSheet(_c.PATH_TO_MEDIA + "/game_elements/projectiles/proj_fire.png", 10, 5),
 		animSettings: {
@@ -220,6 +231,11 @@ ig.module(
 		update:function(){
 			this.parent();
 			this.pos.x += 5;
+		},
+		
+		check:function(other){
+			other.sendHit(this.damage);
+			this.kill();
 		}
 	})
 	

@@ -32,8 +32,13 @@ ig.module(
 		frontground:null,
 		turbolog:null,
 		
+		spawningEnemies:false,
+		bossActive:false,
+		
 		buttons:[],
-			barWidth: 1.8,
+		barWidth: 1.8,
+		
+		startSpawnerTimer:null,
 
 		
 		shapesPasses: [
@@ -45,6 +50,8 @@ ig.module(
 		
 		init:function(){
 			this.parent();
+			
+			this.startSpawnerTimer = new ig.Timer();
 			
 			
        	 	ig.input.bind(ig.KEY.LEFT_ARROW, 'slow');
@@ -71,6 +78,15 @@ ig.module(
 		
 		update:function(){
 			this.parent();
+			if(this.startSpawnerTimer){
+				if(this.startSpawnerTimer.delta() > 2){
+					console.log("SPAWNING ENEMIES")
+					this.spawningEnemies = true;
+					this.startSpawnerTimer = null;
+				}
+			}
+			
+			
 			
 			
 			if(ig.input.state('slow')){
