@@ -36,7 +36,7 @@ ig.module(
 			LEVEL:1,
 			
 			//Level of Item Magnetism
-			MAGNETISM:1,
+			MAGNETISM:5,
 			
 			//////////   FIRE TREE   /////////
 			

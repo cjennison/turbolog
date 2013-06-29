@@ -23,6 +23,9 @@ ig.module(
 		health:1,
 		
 		
+		money_worth:3,
+		exp_worth:2,
+		
 		init:function(x,y,settings){
 			this.parent(x,y,settings);
 			this.y_start = y;

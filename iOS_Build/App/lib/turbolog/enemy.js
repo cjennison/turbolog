@@ -17,10 +17,10 @@ ig.module(
 		collides: ig.Entity.COLLIDES.PASSIVE,
 		performance: _c.KINEMATIC,
 		//Amount of money dropped
-		money_worth:null,
+		money_worth:1,
 		
 		//Amount of EXP dropped
-		exp_worth:null,
+		exp_worth:1,
 		
 		//Amount of pain inflicted
 		pain:0,
@@ -60,7 +60,9 @@ ig.module(
 		
 		kill:function(){
 			this.parent();
-			ig.game.spawnEntity(EntityCoinExplosion, this.pos.x, this.pos.y)
+			ig.game.spawnEntity(EntityCoinExplosion, this.pos.x, this.pos.y, {particles:this.money_worth})
+			ig.game.spawnEntity(EntityExpExplosion, this.pos.x, this.pos.y, {particles:this.exp_worth})
+
 		}
 		
 				

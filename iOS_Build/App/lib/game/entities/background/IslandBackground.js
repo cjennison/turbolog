@@ -29,7 +29,6 @@ ig.module(
 
 		init:function(x,y,settings){
 			this.parent(x,y,settings);
-			console.log("LOADED")
 			this.maxVel.y = 0;
 			this.alpha = .4;
 			
