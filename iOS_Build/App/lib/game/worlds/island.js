@@ -26,7 +26,7 @@ ig.module(
 		//Level Variables
 		skyLimit:{min:10, max:300},
 		waterLimit:{min:300, max:600},
-		
+		groundPos:280,
 		//Spawner Collection
 			//Timer - The Spawner Timer controller
 			//Delay - The Delay of enemy spawning

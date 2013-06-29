@@ -129,11 +129,11 @@ ig.module(
 		},
 		
 		touchStart:function(ev){
-			console.log(ig.system.width/2)
+			//console.log(ig.system.width/2)
 			ev.preventDefault();
 			
 			if(this.dashing){return;}
-			console.log("START: " + ev.touches[0].pageX)
+			//console.log("START: " + ev.touches[0].pageX)
 			if(ev.touches[0].pageX > ig.system.width/2 && ev.touches[0].pageY < ig.system.height - 60){
 				this.startY = ev.touches[0].pageY;
 			} else {
@@ -144,7 +144,7 @@ ig.module(
 		
 		touchMove:function(ev){
 			ev.preventDefault();
-			console.log("END: " + ev.touches[0].pageY)
+			//console.log("END: " + ev.touches[0].pageY)
 			if(this.startY){
 				this.endY = ev.touches[0].pageY;
 			}

@@ -2,10 +2,11 @@ ig.module(
 	'turbolog.enemy'
 )
 .requires(
-	'plusplus.core.entity'
+	'plusplus.core.entity',
+	'game.entities.enemies.pickups'
 )
 .defines(function(){
-		var _c = ig.CONFIG;
+	var _c = ig.CONFIG;
 	var _ut = ig.utils;
 	
 	
@@ -59,6 +60,7 @@ ig.module(
 		
 		kill:function(){
 			this.parent();
+			ig.game.spawnEntity(EntityCoinExplosion, this.pos.x, this.pos.y)
 		}
 		
 				
