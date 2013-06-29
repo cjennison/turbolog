@@ -14,7 +14,6 @@ ig.module(
 		maxVel:{x:500, y:2000},
 		//
 		size: {x:32, y:32},
-		zIndex:4,
 		accelModulator:{x:200, y:170},
 		zIndex:5,
 		
@@ -75,6 +74,9 @@ ig.module(
 		init:function(x, y, settings){
 			this.parent(x,y,settings);
 			this.gravityFactor = 0;	
+			
+			ig.game.spawnEntity(EntityFlames, this.pos.x, this.pos.y)
+			
 			document.addEventListener( 'touchstart', this.touchStart.bind(this), false );
 			document.addEventListener( 'touchmove', this.touchMove.bind(this), false );
 			document.addEventListener( 'touchend', this.touchEnd.bind(this), false );
@@ -82,13 +84,11 @@ ig.module(
 		
 		update:function(){
 			this.parent();
-			
-			
+
 			//Set velocity
 			if(this.dashing == false){
         		this.vel.y = ig.game.stickLeft.input.y * this.accelModulator.y;
 			} else {
-				
 				if(this.dash_dir == "down"){
 					this.vel.y -= 10;
 					if(this.vel.y < 20){
@@ -101,8 +101,6 @@ ig.module(
 						this.dashing = false;
 					}
 				}
-				
-				
 			}
 			
 			this.vel.x = ig.game.stickLeft.input.x * this.accelModulator.x;
@@ -117,7 +115,6 @@ ig.module(
 			if(this.magic < 100){
 				this.magic += .01;
 			}
-			
 			
 			//Check for firing
 			if(ig.input.pressed("shoot") && this.magic > 1){
@@ -226,28 +223,50 @@ ig.module(
 		}
 	})
 	
-	//EFFECTS
 	EntityFlames = ig.EntityExtended.extend({
 		performance: _c.KINEMATIC,
 		size:{x:64, y:32},
-		animSheet: new ig.AnimationSheet('media/game_elements/logs/effects/flames.png', 64, 32),
+		animSheet: new ig.AnimationSheet(_c.PATH_TO_MEDIA + "game_elements/logs/effects/flames.png", 32, 16),
 		animSettings: {
 			idle: {
-				name:"idle",
-				frameTime:0.1,
-				sequence:[0,1,2,3,4]
+				frameTime:0.12,
+				sequence: [0,1,2,3,4]
 			},
-			up:{
-				name:'up',
-				frameTime:0.1,
-				sequence: [5,6,7,8,9]
+			up: {
+				frameTime:0.2,
+				sequence:[5,6,7,8,9]
 			},
-			down:{
-				name:'down',
-				frameTime:0.1,
-				sequence [10,11,12,13,14]
+			down: {
+				frameTime:0.2,
+				sequence:[10,11,12,13,14]
+			}
+		},
+		//zIndex:9,
+		
+		init:function(x,y,settings){
+			this.parent(x,y,settings);
+			
+		},
+		
+		update:function(){
+			this.parent();
+			
+			var yVel = ig.game.turbolog.vel.y;
+			if(yVel > 0){
+				this.currentAnim = this.anims.down
+			} else if (yVel < 0){
+				this.currentAnim = this.anims.up
+			} else {
+				this.currentAnim = this.anims.idle;
 			}
 			
+			
+			this.pos.x = ig.game.turbolog.pos.x;
+			this.pos.y = ig.game.turbolog.pos.y+6;
 		}
+		
+		
 	})
+	
+	
 })
