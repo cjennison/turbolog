@@ -20,7 +20,8 @@ ig.module(
 		maxVel:{x:400, y:100},
 		vel:{x:-90, y:0},
 		friction:{x:100, y:5000},
-		health:2,
+		health:10,
+		MaxHealth:10,
 		
 		
 		money_worth:4,

@@ -21,6 +21,7 @@ ig.module(
 		y_start:null,
 		flyState:"DOWN",
 		health:1,
+		MaxHealth:1,
 		
 		
 		money_worth:3,

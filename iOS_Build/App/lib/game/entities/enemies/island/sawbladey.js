@@ -23,18 +23,19 @@ ig.module(
 		},
 		
 		//Max velocity and velocity
-		maxVel:{x:-1000, y:100},
+		maxVel:{x:-600, y:100},
 		vel:{x:-90, y:0},
 		
 		//health
 		health:2,
+		MaxHealth:2,
 		
 		//Worth
 		money_worth:2,
 		exp_worth:1,
 		
 		//mod
-		mod:40,
+		mod:100,
 		
 		init:function(x,y,settings){
 			this.parent(x,y,settings);

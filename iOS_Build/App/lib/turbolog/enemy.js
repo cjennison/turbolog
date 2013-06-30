@@ -25,8 +25,13 @@ ig.module(
 		//Amount of pain inflicted
 		pain:0,
 		
+		
+		
+		
 		zIndex:10,
+		healthbar:null,
 		health:10,
+		MaxHealth:10,
 		
 		init:function(x,y,settings){
 			this.parent(x,y,settings)
@@ -34,6 +39,9 @@ ig.module(
 			this.type =  ig.Entity.TYPE.B;
 			this.checkAgainst =  ig.Entity.TYPE.A; //check against da log
 			this.collides =  ig.Entity.COLLIDES.PASSIVE;
+			
+			this.healthbar = ig.game.spawnEntity(EntityHealthBar, 10, 10, {Unit:this});
+		
 		},
 		
 		update:function(){
@@ -51,7 +59,8 @@ ig.module(
 		},
 		
 		sendHit:function(amt){
-			//this.healthbar.showHealthBar();
+			console.log(amt);
+			this.healthbar.showHealthBar();
 			this.health -= amt;
 			if(this.health <= 0){
 				this.kill();

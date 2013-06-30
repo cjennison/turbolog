@@ -11,6 +11,7 @@ ig.module(
 	'impact.font',
 	'plugins.touch-button',
 	'plugins.button',
+	'game.entities.ui.healthbar',
 	'plugins.analog-stick'
 )
 .defines(function(){

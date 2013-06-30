@@ -251,12 +251,12 @@ ig.module(
 			}
 		},
 		zIndex:6,
-		damage:10,
+		damage:1,
 		
 		init:function(x,y,settings){
 			this.parent(x,y,settings);
 			this.gravityFactor = 0;	
-			console.log("FIRE")
+			//console.log("FIRE")
 		},
 		
 		update:function(){

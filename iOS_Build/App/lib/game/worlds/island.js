@@ -20,6 +20,8 @@ ig.module(
 	
 	'game.entities.enemies.island.bigbirdy',
 	'game.entities.enemies.island.rocketsaw',
+	    'game.entities.ui.healthbar',
+
 	'game.entities.enemies.island.sawbladey'
 )
 .defines(function(){
@@ -57,6 +59,9 @@ ig.module(
 			//Add background (includes foreground)		
 			this.addBackground(EntityIslandBackground);
 			this.turbolog = this.spawnEntity(EntityTurboLog, 50, ig.system.height/2 );
+			
+			var h = this.spawnEntity(EntityHealthBar, 100, 100)
+			console.log(h)
 			this.sortEntitiesDeferred();
 			
 		},

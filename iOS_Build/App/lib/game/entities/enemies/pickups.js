@@ -17,7 +17,7 @@ ig.module(
 		
 		init:function(x,y,settings){
 			this.parent(x,y,settings);
-			console.log(this.particles)
+			//console.log(this.particles)
 			for (var i = 0; i < this.particles; i++) {
                 if (Math.random() < .8) {
                     ig.game.spawnEntity(EntityCoin, x, y, {
