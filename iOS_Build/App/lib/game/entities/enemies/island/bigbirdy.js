@@ -52,8 +52,11 @@ ig.module(
 				}
 			}
 			
+			var speedMod = ig.game.movementSpeed/20;
 			
-			this.pos.x -= 2;
+			
+			
+			this.pos.x -= (2 + speedMod);
 		},
 		
 		check:function(other){

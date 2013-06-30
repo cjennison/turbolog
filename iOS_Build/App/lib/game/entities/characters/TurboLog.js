@@ -31,6 +31,10 @@ ig.module(
 		health:100,
 		magic:100,
 		dying:false,
+		invincible:false,
+		invincibleTimer:null,
+		invincibleDelay:2,
+		
 				
 		//Animsheet
 		animSheet: new ig.AnimationSheet(_c.PATH_TO_MEDIA + 'game_elements/logs/turbolog.png', 32, 32 ),
@@ -78,6 +82,8 @@ ig.module(
 			this.parent(x,y,settings);
 			this.gravityFactor = 0;	
 			
+			this.invincibleTimer = new ig.Timer();
+			
 			ig.game.spawnEntity(EntityFlames, this.pos.x, this.pos.y)
 			
 			document.addEventListener( 'touchstart', this.touchStart.bind(this), false );
@@ -124,6 +130,13 @@ ig.module(
 				this.magic--;
 				ig.game.spawnEntity(EntityFirebolt, this.pos.x + this.size.x, this.pos.y + this.size.y/2 - 3)
 				ig.game.sortEntitiesDeferred();
+			}
+			
+			
+			//Reset Invincibility
+			if(this.invincibleTimer.delta() > this.invincibleDelay){
+				this.invincible = false;
+				this.currentAnim.alpha = 1;
 			}
 				
 		},
@@ -199,8 +212,26 @@ ig.module(
 		},
 		
 		hurt:function(amt){
+			if(this.invincible){return;}
 			this.health -= (amt);
+			this.makeInvincible();
+			ig.game.movementSpeed -= amt * 2;
 			//this.dying = true;
+		},
+		
+		makeInvincible:function(){
+			this.invincible = true;	
+			this.invincibleTimer.reset();
+		},
+		
+		
+		draw:function(){
+			
+			if(this.invincible){
+				this.currentAnim.alpha = this.invincibleTimer.delta()/this.invincibleDelay*1;
+				//console.log(this.invincibleTimer.delta()%2)
+			}
+			this.parent();
 		}
 	
 	})

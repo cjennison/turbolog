@@ -18,7 +18,9 @@ ig.module(
 	'game.entities.background.IslandBackground',
 	'game.entities.characters.TurboLog',
 	
-	'game.entities.enemies.island.bigbirdy'
+	'game.entities.enemies.island.bigbirdy',
+	'game.entities.enemies.island.rocketsaw',
+	'game.entities.enemies.island.sawbladey'
 )
 .defines(function(){
 	WorldIsland = ig.TurboLevel.extend({
@@ -33,6 +35,12 @@ ig.module(
 		birdSpawner:null,
 		birdDelay:4,
 		
+		sawSpawner:null,
+		sawDelay:4,
+		
+		rocketSawSpawner:null,
+		rocketSawDelay:7,
+		
 		shapesPasses: [
 			{
 				ignoreClimbable: true,
@@ -43,6 +51,8 @@ ig.module(
 			this.parent();
 			
 			this.birdSpawner = new ig.Timer();
+			this.sawSpawner = new ig.Timer();
+			this.rocketSawSpawner = new ig.Timer();			
 			
 			//Add background (includes foreground)		
 			this.addBackground(EntityIslandBackground);
@@ -73,9 +83,22 @@ ig.module(
 					ig.game.spawnEntity(EntityBigbirdy, ig.system.width + 50, yPos);
 					this.birdSpawner.reset()
 				}
+				
+				if(this.sawSpawner.delta() > this.sawDelay){
+					var yPos = Math.random() * this.skyLimit.max + this.skyLimit.min;
+					ig.game.spawnEntity(EntitySawbladey, ig.system.width + 50, yPos);
+					this.sawSpawner.reset()
+				}
+				
+				if(this.rocketSawSpawner.delta() > this.rocketSawDelay){
+					var yPos = Math.random() * this.skyLimit.max + this.skyLimit.min;
+					ig.game.spawnEntity(EntityRocketsaw, ig.system.width + 50, yPos);
+					this.rocketSawSpawner.reset()
+				}
 			} else {
 				
 				this.birdSpawner.reset();
+				this.sawSpawner.reset()
 			}
 		},
 		
