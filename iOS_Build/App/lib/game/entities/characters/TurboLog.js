@@ -116,7 +116,7 @@ ig.module(
 
 			//Clamp Position
 			this.pos.x = Clamp(this.pos.x, ig.system.width - this.size.x + 200, 0);
-			this.pos.y = Clamp(this.pos.y, ig.system.height - this.size.y + 310, 0);
+			this.pos.y = Clamp(this.pos.y, ig.system.height - this.size.y + 270, 0);
 			
 			this.determineRotation();		
 			
@@ -216,6 +216,12 @@ ig.module(
 			this.health -= (amt);
 			this.makeInvincible();
 			ig.game.movementSpeed -= amt * 2;
+			
+			
+			if(this.health <= 0){
+				this.dying = true;
+				ig.game.endGame();
+			}
 			//this.dying = true;
 		},
 		
@@ -262,6 +268,7 @@ ig.module(
 		update:function(){
 			this.parent();
 			this.pos.x += 5;
+			if(this.pos.x > ig.system.width + 100){this.kill()}
 		},
 		
 		check:function(other){

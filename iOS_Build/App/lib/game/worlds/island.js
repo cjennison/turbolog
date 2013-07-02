@@ -72,9 +72,7 @@ ig.module(
 		update:function(){
 			this.parent();
 			
-			var y = this.turbolog.pos.y - (ig.system.height / 2);
-			this.screen.y = (y > 0 && y < ig.system.height) ? y : this.screen.y;
-			//console.log(this.screen.y)
+			
 			
 			this.spawnEnemies();
 			

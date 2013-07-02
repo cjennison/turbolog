@@ -40,6 +40,9 @@ ig.module(
 		barWidth: 1.8,
 		
 		startSpawnerTimer:null,
+		
+		//ui
+		abilityImg: new ig.Image('media/ui/gameplay/ui_abilitybar.png'),
 
 		
 		shapesPasses: [
@@ -87,7 +90,9 @@ ig.module(
 				}
 			}
 			
-			
+			var y = this.turbolog.pos.y - (ig.system.height / 2) + 20;
+			this.screen.y = (y > 0 && y < ig.system.height + 70) ? y : this.screen.y;
+			//console.log(this.screen.y)
 			
 			
 			if(ig.input.state('slow')){
@@ -102,6 +107,10 @@ ig.module(
 		addBackground:function(Entity){
 			this.background = this.spawnEntity(Entity,0,0);
 			this.sortEntitiesDeferred();
+		},
+		
+		endGame:function(){
+			ig.system.setGame(mainmenu);
 		},
 		
 		
@@ -125,6 +134,10 @@ ig.module(
 		       // this.font.draw( 'Money: ' + this.money, 50, 50, ig.Font.ALIGN.CENTER );
 			}
 			
+			var x = ig.system.width/2 - 262/2,
+				y = ig.system.height - 90;
+				//262
+			this.abilityImg.draw(x,y);
 			
 		}
 		

@@ -69,6 +69,7 @@ ig.module(
 		
 		kill:function(){
 			this.parent();
+			this.healthbar.kill();
 			ig.game.spawnEntity(EntityCoinExplosion, this.pos.x, this.pos.y, {particles:this.money_worth})
 			ig.game.spawnEntity(EntityExpExplosion, this.pos.x, this.pos.y, {particles:this.exp_worth})
 
