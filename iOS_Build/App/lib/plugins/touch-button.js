@@ -12,6 +12,7 @@ ig.module(
 ig.TouchButton = ig.Class.extend({	
 	action: 'undefined',
 	image: null,
+	image_down:null,
 	tile: 0,
 	pos: {x: 0, y: 0},
 	size: {x: 0, y: 0},
@@ -20,7 +21,7 @@ ig.TouchButton = ig.Class.extend({
 	pressed: false,	
 	touchId: 0,
 	
-	init: function( action, x, y, width, height, image, tile ) {
+	init: function( action, x, y, width, height, image, tile, image_down ) {
 		var internalWidth = parseInt(ig.system.canvas.offsetWidth) || ig.system.realWidth;
 		var s = ig.system.scale * (internalWidth / ig.system.realWidth);
 		
@@ -30,6 +31,7 @@ ig.TouchButton = ig.Class.extend({
 		this.area = {x1: x * s, y1: y * s, x2: (x + width) * s, y2: (y + height) *s};
 		
 		this.image = image || null;
+		this.image_down = image_down || null;
 		this.tile = tile || 0;
 		
 		document.addEventListener( 'touchstart', this.touchStart.bind(this), false );
@@ -88,6 +90,12 @@ ig.TouchButton = ig.Class.extend({
 	draw: function() {
 		if( this.image ) { 
 			this.image.drawTile( this.pos.x, this.pos.y, this.tile, this.size.x, this.size.y );
+		} 
+		
+		if(this.pressed){
+			if(this.image_down){
+				this.image_down.drawTile( this.pos.x, this.pos.y, this.tile, this.size.x, this.size.y );
+			}
 		}
 	}
 });

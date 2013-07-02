@@ -58,8 +58,8 @@ ig.module(
 			this.startSpawnerTimer = new ig.Timer();
 			
 			
-       	 	ig.input.bind(ig.KEY.LEFT_ARROW, 'slow');
-       	 	ig.input.bind(ig.KEY.RIGHT_ARROW, 'fast');
+       	 	ig.input.bind(ig.KEY.LEFT_ARROW, 'left');
+       	 	ig.input.bind(ig.KEY.RIGHT_ARROW, 'right');
        	 	
        	 	ig.input.bind(ig.KEY.UP_ARROW, 'up')
        	 	ig.input.bind(ig.KEY.DOWN_ARROW, 'down');
@@ -75,7 +75,7 @@ ig.module(
 	        this.stickLeft = new ig.AnalogStick( x1, y, baseSize, stickSize );                      
 	        
 	        this.buttons = [
-	        	new ig.TouchButton('shoot', ig.system.width - 70,  ig.system.height - 70, 64, 64, new ig.Image('/media/ui/gameplay/button_shoot_fire.png'), 0)
+	        	new ig.TouchButton('shoot', ig.system.width - 83,  ig.system.height - 70, 83, 60, new ig.Image('/media/ui/gameplay/UI_firebtnUp.png'), 0, new ig.Image('/media/ui/gameplay/UI_firebtnDown.png'))
 	        ]  
        	 	
 		},
@@ -134,7 +134,7 @@ ig.module(
 		       // this.font.draw( 'Money: ' + this.money, 50, 50, ig.Font.ALIGN.CENTER );
 			}
 			
-			var x = ig.system.width/2 - 262/2,
+			var x = ig.system.width/2 - 202/2,
 				y = ig.system.height - 90;
 				//262
 			this.abilityImg.draw(x,y);

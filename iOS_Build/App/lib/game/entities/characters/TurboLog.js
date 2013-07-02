@@ -85,7 +85,7 @@ ig.module(
 			this.invincibleTimer = new ig.Timer();
 			
 			ig.game.spawnEntity(EntityFlames, this.pos.x, this.pos.y)
-			
+			//this.vel.x = 500;
 			document.addEventListener( 'touchstart', this.touchStart.bind(this), false );
 			document.addEventListener( 'touchmove', this.touchMove.bind(this), false );
 			document.addEventListener( 'touchend', this.touchEnd.bind(this), false );

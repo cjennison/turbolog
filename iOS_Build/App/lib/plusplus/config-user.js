@@ -38,6 +38,14 @@ ig.module(
 			//Level of Item Magnetism
 			MAGNETISM:5,
 			
+			EQUIPPED_ABILITIES:[
+			'fireblast',
+			'trailblaze',
+			'null',
+			'null',
+			'turbo'
+			],
+			
 			//////////   FIRE TREE   /////////
 			
 			
