@@ -1,5 +1,5 @@
 ig.module(
-	'game.screen.main-menu'
+	'game.screen.my-log'
 )
 .requires(
 	'plusplus.core.config',
@@ -8,22 +8,15 @@ ig.module(
 	
 	'impact.font',
 	'plugins.touch-button',
-	'plugins.button',
-	'game.entities.player',
-	'game.entities.spike',
-	
-	'game.worlds.island',
-	'game.screen.my-log',
-	
-	'game.levels.test'
+	'plugins.button'
 	
 )
 .defines(function (){
 		
 	_c = ig.CONFIG;
-	buttons = [];
+	var buttons = [];
 
-	mainmenu = ig.GameExtended.extend({
+	MyLog = ig.GameExtended.extend({
             
             startbtn:null,                
             font: new ig.Font( 'media/04b03.font.png' ),
@@ -42,42 +35,29 @@ ig.module(
                 this.parent();
                                           
                                           
-                ig.input.bind(ig.KEY.SPACE, 'GAME');                       
-                ig.input.bind(ig.KEY.M, 'MYLOG');    
+                  
                                           
-				console.log("Main menu")   
-                //this.loadLevel(ig.global.LevelTest);
+				
                                              
                 if(ig.ua.mobile){
                 	buttons = [
-	                	new ig.TouchButton('GAME', _c.GAME_WIDTH/2 + 25,  _c.GAME_HEIGHT/2 + 30, 100, 50, new ig.Image('/media/ui/main_menu/btn_play.png'), 0),
-	                	new ig.TouchButton('MYLOG', 0,  _c.GAME_HEIGHT - 48, 100, 50, new ig.Image('/media/ui/main_menu/btn_mylog.png'), 0)
+	                	new ig.TouchButton('BACK', 0,  _c.GAME_HEIGHT, 100, 50, new ig.Image('/media/ui/my_log/btn_backUP.png'), 0)
 	                ]   
                 } else {
                 	
                 }        
                           
                                                  
-				// and lets add some atmosphere!
-				this.camera.addAtmosphere(100, {r:0,g:0,b:0, a:.1});
-				
+			
             },
             
             update:function(){
             	
-            	if(ig.input.pressed('GAME')){
-            		console.log("INITIALIZING GAME")
-            		ig.system.setGame(WorldIsland);
-
+            	this.parent();
+            	
+            	if(ig.input.pressed("BACK")){
+            		ig.system.setGame(mainmenu);
             	}
-            	
-            	if(ig.input.pressed('MYLOG')){
-            		console.log("INITIALIZING MYLOG")
-            		ig.system.setGame(MyLog);
-            	}
-            	
-            	
-            	this.parent()
             },
             
             draw: function(){
@@ -91,7 +71,7 @@ ig.module(
 					
 				
 				
-            	this.font.draw( 'ON THE MENU!', x, y, ig.Font.ALIGN.CENTER );
+            	this.font.draw( 'MY LOG!', x, y, ig.Font.ALIGN.CENTER );
 
             }
             

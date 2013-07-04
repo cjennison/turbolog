@@ -29,7 +29,9 @@ ig.module(
 		
 		//Log Variables
 		health:100,
+		maxhealth:100,
 		magic:100,
+		maxmagic:100,
 		dying:false,
 		invincible:false,
 		invincibleTimer:null,

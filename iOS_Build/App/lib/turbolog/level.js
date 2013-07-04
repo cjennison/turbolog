@@ -17,6 +17,8 @@ ig.module(
 .defines(function(){
 	
 	
+	var _c = ig.CONFIG;
+	
 	/*
 	 * Turbo Level
 	 * Handles all things level based!
@@ -41,8 +43,21 @@ ig.module(
 		
 		startSpawnerTimer:null,
 		
+		
+		activeBar:'ability',
+		
 		//ui
-		abilityImg: new ig.Image('media/ui/gameplay/ui_abilitybar.png'),
+		abilityImg: new ig.Image('media/ui/gameplay/Ui_abilityItembar.png'),
+		healthImg: new ig.Image('media/ui/gameplay/lifebar/Ui_Lifebar.png'),
+		healthBackImg: new ig.Image('media/ui/gameplay/lifebar/Ui_LifebarbackL1.png'),
+		manaImg: new ig.Image('media/ui/gameplay/manabar/Ui_manabar.png'),
+		manaBackImg: new ig.Image('media/ui/gameplay/manabar/Ui_ManabarbackL1.png'),
+		moneyImg: new ig.Image('media/ui/gameplay/moneycounter/Ui_moneyCounter.png'),
+		expImg:new ig.Image('media/ui/gameplay/experience/Ui_expbar.png'),
+		expBackImg:new ig.Image('media/ui/gameplay/experience/Ui_expbarback.png'),
+		
+		
+		font: new ig.Font( 'media/04b03.font.png' ),
 
 		
 		shapesPasses: [
@@ -65,7 +80,8 @@ ig.module(
        	 	ig.input.bind(ig.KEY.DOWN_ARROW, 'down');
             
             ig.input.bind(ig.KEY.F, 'shoot');
-       	 	
+            ig.input.bind(ig.KEY.S, 'switch');
+      	 	
        	 	//UI
        	 	var baseSize = 60;
 	   	    var stickSize = 20;
@@ -75,8 +91,23 @@ ig.module(
 	        this.stickLeft = new ig.AnalogStick( x1, y, baseSize, stickSize );                      
 	        
 	        this.buttons = [
-	        	new ig.TouchButton('shoot', ig.system.width - 83,  ig.system.height - 70, 83, 60, new ig.Image('/media/ui/gameplay/UI_firebtnUp.png'), 0, new ig.Image('/media/ui/gameplay/UI_firebtnDown.png'))
-	        ]  
+	        	new ig.TouchButton('shoot', ig.system.width - 83,  ig.system.height - 70, 83, 60, new ig.Image('/media/ui/gameplay/Ui_firebtnUp.png'), 0, new ig.Image('/media/ui/gameplay/Ui_firebtnDown.png')),
+	       		new ig.TouchButton('switch', ig.system.width/2 - 96, ig.system.height - 68, 28, 39, new ig.Image('/media/ui/gameplay/abilities/Ui_switchbtnUp.png'), 0, new ig.Image('/media/ui/gameplay/abilities/Ui_switchbtnUp.png'))
+	        ];
+	        
+	        
+	        for(var i = 0; i < _c.EQUIPPED_ABILITIES.length;i++){
+	        	var ability = _c.EQUIPPED_ABILITIES[i];
+	        	console.log(ability);
+	        	var x = (ig.system.width/2 - 62) + (i * 38.75);
+	        	this.buttons.push(new ig.TouchButton(ability.name, x, ig.system.height - 63, 33, 33, new ig.Image(ability.button_up), 0, new ig.Image(ability.button_down), ability.type));
+	        } 
+	         for(var i = 0; i < _c.EQUIPPED_ITEMS.length;i++){
+	        	var ability = _c.EQUIPPED_ITEMS[i];
+	        	console.log(ability);
+	        	var x = (ig.system.width/2 - 62) + (i * 38.75);
+	        	this.buttons.push(new ig.TouchButton(ability.name, x, ig.system.height - 63, 33, 33, new ig.Image(ability.button_up), 0, new ig.Image(ability.button_down), ability.type, i));
+	        }   
        	 	
 		},
 		
@@ -99,8 +130,49 @@ ig.module(
 				this.movementSpeed -= 2;
 			}
 			
+			if(ig.input.pressed("switch")){
+				console.log("SWITCH")
+				if(this.activeBar == "ability"){
+					this.activeBar = 'item';
+				} else {
+					this.activeBar = "ability";
+				}
+			}
+			
+			
+			if(ig.input.pressed("bomb")){				
+				for(var b = 0;b < _c.EQUIPPED_ITEMS.length;b++){
+					item = _c.EQUIPPED_ITEMS[b];
+					if(item.name == 'bomb'){
+						if(item.count > 0){
+							item.count--;
+							//USE ITEM
+						}
+					}
+				}
+			}
+			if(ig.input.pressed("laser")){				
+				for(var b = 0;b < _c.EQUIPPED_ITEMS.length;b++){
+					item = _c.EQUIPPED_ITEMS[b];
+					if(item.name == 'laser'){
+						if(item.count > 0){
+							item.count--;
+							//USE ITEM
+						}
+					}
+				}
+			}
+			
 			this.movementSpeed++;
 			this.movementSpeed = Clamp(this.movementSpeed, 100, 1);
+			
+			
+			if(_c.EXP > _c.CUR_GOAL){
+				_c.LEVEL++;
+				_c.CUR_GOAL = _c["REQ_LEVEL_" + (_c.LEVEL + 1)];
+			}
+			
+			
 		},
 		
 		//Add the background with given entity (contains foreground and 'front'ground)
@@ -119,26 +191,56 @@ ig.module(
 			
 			//buttons
 			this.stickLeft.draw();
-			for(var i = 0;i < this.buttons.length;i++){
-				this.buttons[i].draw();
-			}
+			
+			
+			
+			//Backings
+			this.healthBackImg.draw(10, -9);
+			this.manaBackImg.draw(9, 23);
+
+			
 			
 			//bars
 			if(this.turbolog && this.turbolog.dying == false){
-				var img = new ig.Image('media/ui/gameplay/ui_healthbar.png');
-				img.draw(10,1, 0, 0, this.barWidth * this.turbolog.health, 25);	        
+				
+				var turbologhealthpct = (this.turbolog.health/this.turbolog.maxhealth) * 110;
+				this.healthImg.draw(10,-15, 0, 0, turbologhealthpct, 80);	        
 		        if(this.turbolog.magic > 0){
-		        	var aimg = new ig.Image('media/ui/gameplay/ui_magicbar.png');
-					aimg.draw(10,20, 0, 0, this.barWidth * this.turbolog.magic, 25);
+		        	
+		        	var turbologmanapct = (this.turbolog.magic/this.turbolog.maxmagic) * 120;
+					this.manaImg.draw(6,20,0,0,turbologmanapct, 80);
+		        	//var aimg = new ig.Image('media/ui/gameplay/ui_magicbar.png');
+					//aimg.draw(10,20, 0, 0, this.barWidth * this.turbolog.magic, 25);
 		        }
-		       // this.font.draw( 'Money: ' + this.money, 50, 50, ig.Font.ALIGN.CENTER );
 			}
 			
-			var x = ig.system.width/2 - 202/2,
-				y = ig.system.height - 90;
+			var x = ig.system.width/2 - 136/2,
+				y = ig.system.height - 70;
 				//262
 			this.abilityImg.draw(x,y);
 			
+			
+			
+			var exppct = (_c.EXP/_c.CUR_GOAL)*193;
+			//console.log(exppct);
+			
+			
+			
+			this.expBackImg.draw(ig.system.width/2 - 100,ig.system.height - 60);
+			this.expImg.draw(ig.system.width/2 - 66,ig.system.height - 56,0,0, exppct, 80);
+			this.font.draw(_c.LEVEL, ig.system.width/2 - 80, ig.system.height - 20, ig.Font.ALIGN.RIGHT );
+
+			
+			this.moneyImg.draw(ig.system.width - 120, -15);
+			this.font.draw(_c.MONEY, ig.system.width - 20, 23, ig.Font.ALIGN.RIGHT );
+			for(var i = 0;i < this.buttons.length;i++){
+				if(this.buttons[i].type == null || this.buttons[i].type == this.activeBar){
+					this.buttons[i].draw();
+					if(this.buttons[i].num != null){
+						this.font.draw(_c.EQUIPPED_ITEMS[this.buttons[i].num].count, this.buttons[i].pos.x, this.buttons[i].pos.y - 20, ig.Font.ALIGN.RIGHT );
+					}
+				}
+			}
 		}
 		
 	})

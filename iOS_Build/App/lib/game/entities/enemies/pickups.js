@@ -125,6 +125,8 @@ ig.module(
 				check: function(other){
 					if(this.enableTimer.delta() > .3){
 						this.kill();
+						_c.MONEY += (this.value);
+
 						//ig.game.money += (this.value);
 					}
 					
@@ -224,6 +226,7 @@ ig.module(
 				check: function(other){
 					if(this.enableTimer.delta() > .3){
 						this.kill();
+						_c.EXP += 1;
 						//ig.game.exp += 1;
 					}
 					

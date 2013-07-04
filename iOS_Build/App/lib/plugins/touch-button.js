@@ -4,10 +4,11 @@ ig.module(
 .requires(
 	'impact.system',
 	'impact.input',
+	'impact.font',
 	'impact.image'
 )
 .defines(function(){
- 
+ var _c = ig.CONFIG;
  
 ig.TouchButton = ig.Class.extend({	
 	action: 'undefined',
@@ -17,11 +18,14 @@ ig.TouchButton = ig.Class.extend({
 	pos: {x: 0, y: 0},
 	size: {x: 0, y: 0},
 	area: {x1: 0, y1:0, x2: 0, y2:0},
- 
+ 	num:0,
 	pressed: false,	
 	touchId: 0,
+	type:'null',
+	font: new ig.Font( 'media/04b03.font.png' ),
+
 	
-	init: function( action, x, y, width, height, image, tile, image_down ) {
+	init: function( action, x, y, width, height, image, tile, image_down, type, num ) {
 		var internalWidth = parseInt(ig.system.canvas.offsetWidth) || ig.system.realWidth;
 		var s = ig.system.scale * (internalWidth / ig.system.realWidth);
 		
@@ -33,6 +37,8 @@ ig.TouchButton = ig.Class.extend({
 		this.image = image || null;
 		this.image_down = image_down || null;
 		this.tile = tile || 0;
+		this.type = type || null;
+		this.num = num;
 		
 		document.addEventListener( 'touchstart', this.touchStart.bind(this), false );
 		document.addEventListener( 'touchend', this.touchEnd.bind(this), false );
@@ -40,7 +46,12 @@ ig.TouchButton = ig.Class.extend({
 	
 	touchStart: function( ev ) {
 		ev.preventDefault();
- 
+ 		
+ 		if(this.type != null && this.type != ig.game.activeBar){
+ 			return;
+ 		}
+ 		
+ 		
 		if( this.pressed ) { return; }
 		
 		var el = ig.system.canvas;
@@ -88,15 +99,19 @@ ig.TouchButton = ig.Class.extend({
 	},
 	
 	draw: function() {
-		if( this.image ) { 
-			this.image.drawTile( this.pos.x, this.pos.y, this.tile, this.size.x, this.size.y );
-		} 
+		if(this.pressed == false){
+			if( this.image ) { 
+				this.image.drawTile( this.pos.x, this.pos.y, this.tile, this.size.x, this.size.y );
+			} 
+		}
+		
 		
 		if(this.pressed){
 			if(this.image_down){
 				this.image_down.drawTile( this.pos.x, this.pos.y, this.tile, this.size.x, this.size.y );
 			}
 		}
+		
 	}
 });
  
