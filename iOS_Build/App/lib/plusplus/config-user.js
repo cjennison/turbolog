@@ -35,6 +35,9 @@ ig.module(
 			//Player Level
 			LEVEL:1,
 			
+			DAMAGE:1,
+			ARMOR:1,
+			
 			//EXP REQS
 			REQ_LEVEL_2:100,
 			REQ_LEVEL_3:200,
@@ -88,9 +91,121 @@ ig.module(
 			],
 			
 			FIRST_LOG:true,
+			SELECTED_TREE:null,
 			
 			//////////   FIRE TREE   /////////
+			TREES:[
+				{
+					name:"FIRE",
+					id:"fire",
+					base_abilities:[
+						{
+							mod:"DAMAGE",
+							amt:5,
+							active:true
+						}
+					],
+					
+					abilities:[
+						{
+							name:"Flame Up",
+							id:"ABI_FLAME_UP",
+							type:"MODIFIER",
+							image:"fire_up.png",
+							mod:"DAMAGE",
+							amt:1,
+							amt_mod:1,
+							max_stage:5,
+							active:true,
+							level:1,
+							pos:.5,
+							tier:1,
+							stage:1
+						},
+						{
+							name:"Fire Armor",
+							id:"ABI_FLAME_ARMOR",
+							type:"MODIFIER",
+							image:"fire_armor.png",
+							mod:"ARMOR",
+							amt:1,
+							max_stage:5,
+							amt_mod:.5,
+							active:true,
+							level:1,
+							tier:1,
+							pos:1.5,
+							stage:1
+						},
+						{
+							name:"Volitility",
+							id:"ABI_VOLITILE",
+							type:"MODIFIER",
+							image:"fire_armor.png",
+							mod:"ARMOR",
+							amt:1,
+							amt_mod:2,
+							max_stage:3,
+							active:true,
+							level:5,
+							tier:2,
+							pos:0,
+							stage:1
+						},
+						{
+							name:"Flamey Warz",
+							type:"MODIFIER",
+							id:"ABI_VOLITILE",
+							image:"fire_armor.png",
+							mod:"ARMOR",
+							amt:1,
+							amt_mod:2,
+							max_stage:3,
+							active:true,
+							level:5,
+							tier:2,
+							pos:1,
+							stage:1
+						},
+						{
+							name:"BANG DING OW",
+							id:"ABI_BANG_DING",
+							type:"MODIFIER",
+							image:"fire_armor.png",
+							mod:"ARMOR",
+							amt:1,
+							amt_mod:2,
+							max_stage:3,
+							active:true,
+							level:5,
+							tier:2,
+							pos:2,
+							stage:1
+						}
+					]
+				},
+				{
+					name:"EARTH",
+					base_abilities:[
+						{
+							mod:"ARMOR",
+							amt:5,
+							active:true
+						}
+					],
+				},
+				{
+					name:"AIR",
+					base_abilities:[
+						{
+							mod:"DAMAGE",
+							amt:2,
+							active:true
+						}
+					],
+				},
 			
+			]
 			
 			//////////   EARTH TREE   /////////
 			

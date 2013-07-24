@@ -22,10 +22,14 @@ ig.TouchButton = ig.Class.extend({
 	pressed: false,	
 	touchId: 0,
 	type:'null',
+	enabled:true,
 	font: new ig.Font( 'media/04b03.font.png' ),
-
+	settings:null,
+	selectorbtn:false,
+	selected:false,
+	selected_image:null,
 	
-	init: function( action, x, y, width, height, image, tile, image_down, type, num ) {
+	init: function( action, x, y, width, height, image, tile, image_down, type, num, enabled, settings, selectorbtn, selected_image ) {
 		var internalWidth = parseInt(ig.system.canvas.offsetWidth) || ig.system.realWidth;
 		var s = ig.system.scale * (internalWidth / ig.system.realWidth);
 		
@@ -39,6 +43,10 @@ ig.TouchButton = ig.Class.extend({
 		this.tile = tile || 0;
 		this.type = type || null;
 		this.num = num;
+		this.enabled = enabled || true;
+		this.settings = settings;
+		this.selectorbtn = selectorbtn;
+		this.selected_image = selected_image;
 		
 		document.addEventListener( 'touchstart', this.touchStart.bind(this), false );
 		document.addEventListener( 'touchend', this.touchEnd.bind(this), false );
@@ -46,7 +54,7 @@ ig.TouchButton = ig.Class.extend({
 	
 	touchStart: function( ev ) {
 		ev.preventDefault();
- 		
+ 		if(this.enabled == false){ return; }; 
  		if(this.type != null && this.type != ig.game.activeBar){
  			return;
  		}
@@ -72,6 +80,9 @@ ig.TouchButton = ig.Class.extend({
 			) {
 				this.pressed = true;
 				this.touchId = ev.touches[i].identifier;
+				if(this.settings){
+					ig.game.buttonSettings = this.settings;
+				}	
  
 				ig.input.actions[this.action] = true;
 				if( !ig.input.locks[this.action] ) {
@@ -92,25 +103,56 @@ ig.TouchButton = ig.Class.extend({
 			if( ev.changedTouches[i].identifier === this.touchId ) {
 				this.pressed = false;
 				this.touchId = 0;
-				ig.input.delayedKeyup[this.action] = true;				
+				ig.input.delayedKeyup[this.action] = true;	
+						
 				return;
 			}
 		}
 	},
 	
-	draw: function() {
-		if(this.pressed == false){
-			if( this.image ) { 
-				this.image.drawTile( this.pos.x, this.pos.y, this.tile, this.size.x, this.size.y );
-			} 
-		}
-		
-		
-		if(this.pressed){
-			if(this.image_down){
-				this.image_down.drawTile( this.pos.x, this.pos.y, this.tile, this.size.x, this.size.y );
+	draw: function(posX, posY) {
+		var newPosX = posX != null ? posX : this.pos.x;
+		var newPosY = posY != null ? posY : this.pos.y;
+		var internalWidth = parseInt(ig.system.canvas.offsetWidth) || ig.system.realWidth;
+		var s = ig.system.scale * (internalWidth / ig.system.realWidth);
+				//this.area = {x1: newPosX * s, y1: y * s, x2: (newPosX + width) * s, y2: (y + height) *s};
+		this.area.x1 = newPosX * s;
+		this.area.x2 = (newPosX + this.size.x) * s;
+		this.area.y1 = newPosY * s;
+		this.area.y2 = (newPosY + this.size.y) * s;
+		if(this.selectorbtn){
+			if(this.selected){
+				this.image.drawTile( newPosX, newPosY, this.tile, this.size.x, this.size.y );
+				//this.selected_image.drawTile( newPosX, newPosY, this.tile, this.size.x, this.size.y );
+			}else {
+				if(this.pressed == false){
+					if( this.image ) { 
+						this.image.drawTile( newPosX, newPosY, this.tile, this.size.x, this.size.y );
+					} 
+				}
+				
+				
+				if(this.pressed){
+					if(this.image_down){
+						this.image_down.drawTile( newPosX, newPosY, this.tile, this.size.x, this.size.y );
+					}
+				}
+			}
+		} else {
+			if(this.pressed == false){
+				if( this.image ) { 
+					this.image.drawTile( newPosX, newPosY, this.tile, this.size.x, this.size.y );
+				} 
+			}
+			
+			
+			if(this.pressed){
+				if(this.image_down){
+						this.image_down.drawTile( newPosX, newPosY, this.tile, this.size.x, this.size.y );
+				}
 			}
 		}
+		
 		
 	}
 });

@@ -93,7 +93,7 @@ ig.AnalogStick = ig.Class.extend({
 		}
 	},
 	
-	draw: function() {
+	draw: function(posX, posY) {
 		var ctx = ig.system.context;
 		ctx.beginPath();
 		ctx.arc(this.pos.x, this.pos.y, this.baseSize, 0, (Math.PI * 2), true);

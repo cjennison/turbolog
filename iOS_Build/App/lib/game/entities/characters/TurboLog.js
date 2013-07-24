@@ -19,6 +19,7 @@ ig.module(
 		size: {x:32, y:32},
 		accelModulator:{x:200, y:170},
 		zIndex:5,
+		armor:1,
 		
 		//Dash
 		startY:null,
@@ -85,6 +86,8 @@ ig.module(
 			this.gravityFactor = 0;	
 			
 			this.invincibleTimer = new ig.Timer();
+			
+			this.armor = _c.ARMOR;
 			
 			ig.game.spawnEntity(EntityFlames, this.pos.x, this.pos.y)
 			//this.vel.x = 500;
@@ -215,7 +218,8 @@ ig.module(
 		
 		hurt:function(amt){
 			if(this.invincible){return;}
-			this.health -= (amt);
+			var health_loss = (amt/this.armor)
+			this.health -= health_loss;
 			this.makeInvincible();
 			ig.game.movementSpeed -= amt * 2;
 			
@@ -264,6 +268,7 @@ ig.module(
 		init:function(x,y,settings){
 			this.parent(x,y,settings);
 			this.gravityFactor = 0;	
+			this.damage = _c.DAMAGE;
 			//console.log("FIRE")
 		},
 		
