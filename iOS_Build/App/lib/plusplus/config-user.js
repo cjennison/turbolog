@@ -1,6 +1,9 @@
 ig.module(
         'plusplus.config-user'
     )
+    .requires(
+    	'impact.image'
+    )
     .defines(function () {
 
         /**
@@ -89,6 +92,12 @@ ig.module(
 				},
 			
 			],
+			
+			EQUIPPED_GEAR:{
+				//head:null,
+				//body:null,
+				//legs:null
+			},
 			
 			FIRST_LOG:true,
 			SELECTED_TREE:null,
@@ -205,13 +214,42 @@ ig.module(
 					],
 				},
 			
-			]
+			],
 			
 			//////////   EARTH TREE   /////////
 			
 			
 			//////////   AIR TREE   /////////
+			
+			INVENTORY:[
+				{
+					id:'test_head_1',
+					name:"Super Test Head",
+					component:"head",
+					mod:"ARMOR",
+					amt:2,
+					set:"The Tester",
+					icon:"test_head.png",
+					obj:new ig.Image('/media/ui/my_log/gear/gear_objects/test_object.png')
+				},
+				{
+					id:'test_body_1',
+					name:"Super Test Body",
+					component:"body",
+					mod:"ARMOR",
+					amt:4,
+					set:"The Tester",
+					icon:"test_body.png",
+					obj:new ig.Image('/media/ui/my_log/gear/gear_objects/test_object.png')
+				}
+				
+				
+			
+			],
+			
 		};
+		
+		
 		
 		
 

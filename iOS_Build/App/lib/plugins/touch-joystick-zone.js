@@ -37,7 +37,7 @@ TouchJoystickZone = ig.Class.extend({
 
     touchStart: function(ev) {
         ev.preventDefault();
-
+		if(ig.game.dragging == true){return}
         var el = ig.system.canvas;
         var pos = {left:0, top:0};
 

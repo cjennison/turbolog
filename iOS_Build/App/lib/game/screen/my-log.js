@@ -14,6 +14,7 @@ ig.module(
 	
 	'impact.font',
 	'plugins.touch-button',
+	'plugins.drag-button',
 	'plugins.touch-joystick-zone',
 	//'plugins.tween',
 	'plugins.button'
@@ -34,6 +35,8 @@ ig.module(
             transitioning:null,
             
             buttonSettings:null,
+            gearSettings:null,
+            dragging:false,
             
             WindowGroup:[],
             SwipeZone:null,
@@ -125,7 +128,7 @@ ig.module(
             	
             	
             	//Swipe Controller
-            	if(this.SwipeZone.complete == true && this.canSwipe){
+            	if(this.SwipeZone.complete == true && this.canSwipe && this.dragging == false){
             		this.SwipeZone.complete = false;
             		//console.log("Successful Swipe")
             		var dir = (this.SwipeZone.dir  == "right") ? 1 : -1;
@@ -284,6 +287,12 @@ ig.module(
             	
             	this.confirmationPopup.enabled = true;
             	
+            },
+            
+            installGear:function(settings){
+            	console.log(settings)
+            	_c.EQUIPPED_GEAR[settings.component] = settings;
+            	console.log("EQUIPPED SOME: " + settings.component)
             },
             
             
