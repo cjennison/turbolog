@@ -39,7 +39,9 @@ ig.module(
 		
 		preview_window:new ig.Image('/media/ui/my_log/gear/dropzone.png'),
 		turbolog:new ig.Image('/media/ui/my_log/gear/turbolog.png'),
-		
+		unequip_head:null,
+		unequip_body:null,
+		unequip_legs:null,
 		animSheet: new ig.AnimationSheet(_c.PATH_TO_MEDIA + 'ui/my_log/win_Gear.png', 480, 320),
 		animSettings: {
 			idle: {
@@ -60,6 +62,10 @@ ig.module(
 			
 			//this.inventory = _c.INVENTORY;
 			
+			this.unequip_head = new ig.TouchButton("UNEQUIP_HEAD", this.pos.x + 380, 180, 20, 20, new ig.Image('/media/ui/my_log/gear/unequip_btn.png')),
+			this.unequip_body = new ig.TouchButton("UNEQUIP_BODY", this.pos.x + 350, 180, 20, 20, new ig.Image('/media/ui/my_log/gear/unequip_btn.png')),
+			this.unequip_legs = new ig.TouchButton("UNEQUIP_LEGS", this.pos.x + 330, 180, 20, 20, new ig.Image('/media/ui/my_log/gear/unequip_btn.png')),
+
 			document.addEventListener('touchstart', this.touchStart.bind(this), false);
 			document.addEventListener('touchend', this.touchEnd.bind(this), false);
 			document.addEventListener('touchmove', this.touchMove.bind(this), false);
@@ -186,6 +192,9 @@ ig.module(
 				
 			}
 			
+			
+			
+			
 		},
 		
 		draw:function(){
@@ -196,12 +205,15 @@ ig.module(
 			this.turbolog.draw(this.pos.x + 350, 180);
 			
 			if(_c.EQUIPPED_GEAR.head){
+				this.unequip_head.draw(this.pos.x + 380, 150)
 				_c.EQUIPPED_GEAR.head.obj.draw(this.pos.x + 380, 180)
 			}
 			if(_c.EQUIPPED_GEAR.body){
+				this.unequip_body.draw(this.pos.x + 350, 150)
 				_c.EQUIPPED_GEAR.body.obj.draw(this.pos.x + 350, 180)
 			}
 			if(_c.EQUIPPED_GEAR.legs){
+				this.unequip_legs.draw(this.pos.x + 340, 150)
 				_c.EQUIPPED_GEAR.legs.obj.draw(this.pos.x + 340, 180)
 			}
 			
@@ -256,6 +268,9 @@ ig.module(
 				}
 				if(_c.EQUIPPED_GEAR.body != null){
 					str += ("\nBody: " + _c.EQUIPPED_GEAR.body.mod + "+" + _c.EQUIPPED_GEAR.body.amt) 
+				}
+				if(_c.EQUIPPED_GEAR.legs != null){
+					str += ("\nLegs: " + _c.EQUIPPED_GEAR.legs.mod + "+" + _c.EQUIPPED_GEAR.legs.amt) 
 				}
 			}
 			

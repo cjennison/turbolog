@@ -2,7 +2,8 @@ ig.module(
         'plusplus.config-user'
     )
     .requires(
-    	'impact.image'
+    	'impact.image',
+    	'plugins.touch-button'
     )
     .defines(function () {
 
@@ -238,6 +239,16 @@ ig.module(
 					component:"body",
 					mod:"ARMOR",
 					amt:4,
+					set:"The Tester",
+					icon:"test_body.png",
+					obj:new ig.Image('/media/ui/my_log/gear/gear_objects/test_object.png')
+				},
+				{
+					id:'test_legs_1',
+					name:"Super Test Legs",
+					component:"legs",
+					mod:"ARMOR",
+					amt:3,
 					set:"The Tester",
 					icon:"test_body.png",
 					obj:new ig.Image('/media/ui/my_log/gear/gear_objects/test_object.png')

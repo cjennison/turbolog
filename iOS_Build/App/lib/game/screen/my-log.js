@@ -256,6 +256,16 @@ ig.module(
 						}
 					}
 				}
+				
+				if(ig.input.pressed("UNEQUIP_HEAD")){
+					this.uninstallGear("head");
+				}
+				if(ig.input.pressed("UNEQUIP_BODY")){
+					this.uninstallGear("body");
+				}
+				if(ig.input.pressed("UNEQUIP_LEGS")){
+					this.uninstallGear("legs");
+				}
             	
             },
             
@@ -289,10 +299,34 @@ ig.module(
             	
             },
             
+          
+			/**
+			 * Adds gear to slots and increases skills. Remvoes existing gear.
+			 * @param {Object} settings Gear settings object
+			 */
             installGear:function(settings){
-            	console.log(settings)
+            	if(_c.EQUIPPED_GEAR[settings.component] != null){
+            		uninstallGear(_c.EQUIPPED_GEAR[settings.component]);
+            	}
             	_c.EQUIPPED_GEAR[settings.component] = settings;
             	console.log("EQUIPPED SOME: " + settings.component)
+            	_c[settings.mod] += settings.amt;
+            	
+            	console.log(_c.ARMOR);
+            	
+            },
+            
+            /**
+             * Uninstall Gear 
+             * Removes and unsets skills or modifiers from the config file.
+ 			 * @param {Object} settings Gear settings object
+             */
+            uninstallGear:function(component){
+            	//_c.EQUIPPED_GEAR[component]
+            	_c[_c.EQUIPPED_GEAR[component].mod] -= _c.EQUIPPED_GEAR[component].amt;
+            	_c.EQUIPPED_GEAR[component] = null;
+            	console.log("UNEQUIPPED YOUR: " + component);
+            	console.log(_c.ARMOR);
             },
             
             
