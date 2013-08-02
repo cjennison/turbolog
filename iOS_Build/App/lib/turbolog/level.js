@@ -55,7 +55,10 @@ ig.module(
 		moneyImg: new ig.Image('media/ui/gameplay/moneycounter/Ui_moneyCounter.png'),
 		expImg:new ig.Image('media/ui/gameplay/experience/Ui_expbar.png'),
 		expBackImg:new ig.Image('media/ui/gameplay/experience/Ui_expbarback.png'),
+		pauseBtn:null,
 		
+		resumeBtn:null,
+		quitBtn:null,
 		
 		font: new ig.Font( 'media/04b03.font.png' ),
 
@@ -95,6 +98,10 @@ ig.module(
 	       		new ig.TouchButton('switch', ig.system.width/2 - 96, ig.system.height - 68, 28, 39, new ig.Image('/media/ui/gameplay/abilities/Ui_switchbtnUp.png'), 0, new ig.Image('/media/ui/gameplay/abilities/Ui_switchbtnUp.png'))
 	        ];
 	        
+	        this.pauseBtn = new ig.TouchButton('pause', ig.system.width/2 + 100, 20, 20,20,new ig.Image('/media/ui/gameplay/pausebtn.png'));
+	        this.resumeBtn = new ig.TouchButton('resume', ig.system.width/2, 20, 70,40, new ig.Image('/media/ui/gameplay/pause_menu/ui_resume.png'));
+	        this.quitBtn = new ig.TouchButton('quit', ig.system.width/2, 90, 70,40, new ig.Image('/media/ui/gameplay/pause_menu/ui_quit.png'));
+
 	        
 	        for(var i = 0; i < _c.EQUIPPED_ABILITIES.length;i++){
 	        	var ability = _c.EQUIPPED_ABILITIES[i];
@@ -137,6 +144,18 @@ ig.module(
 				} else {
 					this.activeBar = "ability";
 				}
+			}
+			
+			if(ig.input.pressed("pause")){
+				this.pause();
+			}
+			
+			if(ig.input.pressed('resume')){
+				this.unpause();
+			}
+			
+			if(ig.input.pressed('quit')){
+				ig.system.setGame(mainmenu);
 			}
 			
 			
@@ -191,7 +210,7 @@ ig.module(
 			
 			//buttons
 			this.stickLeft.draw();
-			
+			this.pauseBtn.draw();
 			
 			
 			//Backings
@@ -240,6 +259,11 @@ ig.module(
 						this.font.draw(_c.EQUIPPED_ITEMS[this.buttons[i].num].count, this.buttons[i].pos.x, this.buttons[i].pos.y - 20, ig.Font.ALIGN.RIGHT );
 					}
 				}
+			}
+			
+			if(this.paused){
+				this.resumeBtn.draw();
+				this.quitBtn.draw();
 			}
 		}
 		
