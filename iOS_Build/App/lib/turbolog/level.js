@@ -120,35 +120,64 @@ ig.module(
 		
 		update:function(){
 			this.parent();
-			if(this.startSpawnerTimer){
-				if(this.startSpawnerTimer.delta() > 2){
-					console.log("SPAWNING ENEMIES")
-					this.spawningEnemies = true;
-					this.startSpawnerTimer = null;
+			
+			
+			if(!this.paused){
+				if(this.startSpawnerTimer){
+					if(this.startSpawnerTimer.delta() > 2){
+						console.log("SPAWNING ENEMIES")
+						this.spawningEnemies = true;
+						this.startSpawnerTimer = null;
+					}
 				}
-			}
-			
-			var y = this.turbolog.pos.y - (ig.system.height / 2) + 20;
-			this.screen.y = (y > 0 && y < ig.system.height + 70) ? y : this.screen.y;
-			//console.log(this.screen.y)
-			
-			
-			if(ig.input.state('slow')){
-				this.movementSpeed -= 2;
-			}
-			
-			if(ig.input.pressed("switch")){
-				console.log("SWITCH")
-				if(this.activeBar == "ability"){
-					this.activeBar = 'item';
-				} else {
-					this.activeBar = "ability";
+				
+				var y = this.turbolog.pos.y - (ig.system.height / 2) + 20;
+				this.screen.y = (y > 0 && y < ig.system.height + 70) ? y : this.screen.y;
+				//console.log(this.screen.y)
+				
+				
+				if(ig.input.state('slow')){
+					this.movementSpeed -= 2;
 				}
+				
+				if(ig.input.pressed("switch")){
+					console.log("SWITCH")
+					if(this.activeBar == "ability"){
+						this.activeBar = 'item';
+					} else {
+						this.activeBar = "ability";
+					}
+				}
+				
+				if(ig.input.pressed("pause")){
+					this.pause();
+				}
+				
+				if(ig.input.pressed("bomb")){				
+					for(var b = 0;b < _c.EQUIPPED_ITEMS.length;b++){
+						item = _c.EQUIPPED_ITEMS[b];
+						if(item.name == 'bomb'){
+							if(item.count > 0){
+								item.count--;
+								//USE ITEM
+							}
+						}
+					}
+				}
+				if(ig.input.pressed("laser")){				
+					for(var b = 0;b < _c.EQUIPPED_ITEMS.length;b++){
+						item = _c.EQUIPPED_ITEMS[b];
+						if(item.name == 'laser'){
+							if(item.count > 0){
+								item.count--;
+								//USE ITEM
+							}
+						}
+					}
+				}
+			
 			}
 			
-			if(ig.input.pressed("pause")){
-				this.pause();
-			}
 			
 			if(ig.input.pressed('resume')){
 				this.unpause();
@@ -159,28 +188,6 @@ ig.module(
 			}
 			
 			
-			if(ig.input.pressed("bomb")){				
-				for(var b = 0;b < _c.EQUIPPED_ITEMS.length;b++){
-					item = _c.EQUIPPED_ITEMS[b];
-					if(item.name == 'bomb'){
-						if(item.count > 0){
-							item.count--;
-							//USE ITEM
-						}
-					}
-				}
-			}
-			if(ig.input.pressed("laser")){				
-				for(var b = 0;b < _c.EQUIPPED_ITEMS.length;b++){
-					item = _c.EQUIPPED_ITEMS[b];
-					if(item.name == 'laser'){
-						if(item.count > 0){
-							item.count--;
-							//USE ITEM
-						}
-					}
-				}
-			}
 			
 			this.movementSpeed++;
 			this.movementSpeed = Clamp(this.movementSpeed, 100, 1);

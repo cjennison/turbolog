@@ -188,6 +188,7 @@ ig.module(
 					this.tweening = false;
 					this.vel.x = 0;
 					this.pos.x = this.targetPos;
+					ig.game.canSwipe = true;
 				}
 				
 			}

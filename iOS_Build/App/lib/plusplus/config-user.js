@@ -258,6 +258,16 @@ ig.module(
 			
 			],
 			
+			
+			//Statistics
+			KILLS:0,
+			DEATHS:0,
+			GAMES_PLAYED:0,
+			TIME_PLAYED:0,
+			MONEY_EARNED:0,
+			MONEY_SPENT:0,
+			
+			
 		};
 		
 		

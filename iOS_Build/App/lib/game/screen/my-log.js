@@ -135,6 +135,7 @@ ig.module(
             		for(var i = 0;i < this.WindowGroup.length;i++){
             			this.WindowGroup[i].targetPos = (this.WindowGroup[i].pos.x + (ig.system.width) * dir);
             			this.WindowGroup[i].tweening = true;
+            			this.canSwipe = false;
             		}
             		
             	}

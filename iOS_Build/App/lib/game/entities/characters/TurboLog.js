@@ -131,7 +131,7 @@ ig.module(
 			}
 			
 			//Check for firing
-			if(ig.input.pressed("shoot") && this.magic > 1){
+			if(ig.input.pressed("shoot") && this.magic > 1 && ig.game.paused == false){
 				this.magic--;
 				ig.game.spawnEntity(EntityFirebolt, this.pos.x + this.size.x, this.pos.y + this.size.y/2 - 3)
 				ig.game.sortEntitiesDeferred();
