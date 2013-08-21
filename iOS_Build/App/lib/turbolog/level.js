@@ -184,7 +184,7 @@ ig.module(
 			}
 			
 			if(ig.input.pressed('quit')){
-				ig.system.setGame(mainmenu);
+				ig.system.setGame(endlevel);
 			}
 			
 			
@@ -208,7 +208,7 @@ ig.module(
 		},
 		
 		endGame:function(){
-			ig.system.setGame(mainmenu);
+			ig.system.setGame(endlevel);
 		},
 		
 		

@@ -15,13 +15,14 @@ ig.module(
 	'game.entities.spike',
 	
 	'game.levels.test',
+	'game.screen.end-level',
 	'game.screen.main-menu'
 )
 // define the main module
 .defines(function () {
     "use strict";
     var _c = ig.CONFIG;
-         var buttons = [];
+    var buttons = [];
     // we probably want to go ahead and debug while developing
     
     // and don't forget to turn off debugging
