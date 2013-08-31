@@ -34,6 +34,7 @@ ig.module(
 			
 			//Money
 			MONEY:0,
+			NEW_MONEY:0,
 			
 			//Experience
 			EXP:95,
@@ -43,6 +44,20 @@ ig.module(
 			
 			DAMAGE:1,
 			ARMOR:1,
+			
+			LOOT:[
+				{
+					id:'test_head_1',
+					name:"Super Test Head",
+					component:"head",
+					mod:"ARMOR",
+					amt:2,
+					set:"The Tester",
+					icon:"test_head.png",
+					obj:new ig.Image('/media/ui/my_log/gear/gear_objects/test_object.png')
+				}
+			
+			],
 			
 			//EXP REQS
 			REQ_LEVEL_2:100,

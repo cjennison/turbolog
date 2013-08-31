@@ -209,6 +209,7 @@ ig.module(
 		
 		endGame:function(){
 			ig.system.setGame(endlevel);
+			_c.RESULT = "LOSE";
 		},
 		
 		

@@ -126,7 +126,7 @@ ig.module(
 					if(this.enableTimer.delta() > .3){
 						this.kill();
 						_c.MONEY += (this.value);
-
+						_c.NEW_MONEY += (this.value);
 						//ig.game.money += (this.value);
 					}
 					
