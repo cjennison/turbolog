@@ -35,6 +35,13 @@ ig.module(
 		draw:function(){
 			this.parent();
 			
+			if(_c.RESULT == "LOSE"){
+				this.font.draw("FOILED AGAIN!", ig.system.width/2, 30, ig.Font.ALIGN.CENTER);
+			} else {
+				this.font.draw("GREAT SUCCESS!", ig.system.width/2, 30, ig.Font.ALIGN.CENTER);
+			}
+			
+			
 			this.font.draw("END LEVEL", ig.system.width/2, ig.system.height/2, ig.Font.ALIGN.CENTER);
 		}
 		

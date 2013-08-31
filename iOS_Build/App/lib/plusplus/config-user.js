@@ -26,6 +26,8 @@ ig.module(
 			// make it bigger!
 			SCALE: 1,
 			
+			RESULT:"LOSE",
+			
 			// speeds
 			MAX_SPEED: 100,
 			MIN_SPEED: 0,
