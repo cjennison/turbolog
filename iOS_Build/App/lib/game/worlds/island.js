@@ -30,7 +30,7 @@ ig.module(
 		//Level Variables
 		skyLimit:{min:10, max:300},
 		waterLimit:{min:300, max:600},
-		groundPos:280,
+		groundPos:220,
 		//Spawner Collection
 			//Timer - The Spawner Timer controller
 			//Delay - The Delay of enemy spawning
@@ -59,7 +59,7 @@ ig.module(
 			//Add background (includes foreground)		
 			this.addBackground(EntityIslandBackground);
 			this.turbolog = this.spawnEntity(EntityTurboLog, 50, ig.system.height/2 );
-			
+			this.foreground = ig.game.spawnEntity(EntityIslandForeground,0,0)
 			var h = this.spawnEntity(EntityHealthBar, 100, 100)
 			console.log(h)
 			this.sortEntitiesDeferred();

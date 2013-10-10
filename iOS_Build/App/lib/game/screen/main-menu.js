@@ -14,13 +14,15 @@ ig.module(
 	
 	'game.worlds.island',
 	'game.screen.my-log',
-	
+	'game.tools.stats',
 	'game.levels.test'
 	
 )
 .defines(function (){
 		
 	_c = ig.CONFIG;
+	_t = ig.TOOLS;
+
 	buttons = [];
 
 	mainmenu = ig.GameExtended.extend({
@@ -40,8 +42,8 @@ ig.module(
             init: function () {
 			
                 this.parent();
-                                          
-                                          
+                              
+                _t.saveGame();                       
                 ig.input.bind(ig.KEY.SPACE, 'GAME');                       
                 ig.input.bind(ig.KEY.M, 'MYLOG');    
                                           

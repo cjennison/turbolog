@@ -121,7 +121,7 @@ ig.module(
 
 			//Clamp Position
 			this.pos.x = Clamp(this.pos.x, ig.system.width - this.size.x + 200, 0);
-			this.pos.y = Clamp(this.pos.y, ig.system.height - this.size.y + 270, 0);
+			this.pos.y = Clamp(this.pos.y, ig.system.height - this.size.y + 200, 0);
 			
 			this.determineRotation();		
 			
@@ -302,7 +302,7 @@ ig.module(
 				sequence:[10,11,12,13,14]
 			}
 		},
-		//zIndex:9,
+		zIndex:5,
 		
 		init:function(x,y,settings){
 			this.parent(x,y,settings);
@@ -323,7 +323,7 @@ ig.module(
 			
 			
 			this.pos.x = ig.game.turbolog.pos.x;
-			this.pos.y = ig.game.turbolog.pos.y+6;
+			this.pos.y = ig.game.turbolog.pos.y+3;
 		}
 		
 		

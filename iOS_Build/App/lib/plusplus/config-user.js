@@ -37,7 +37,7 @@ ig.module(
 			NEW_MONEY:0,
 			
 			//Experience
-			EXP:95,
+			EXP:0,
 			
 			//Player Level
 			LEVEL:1,

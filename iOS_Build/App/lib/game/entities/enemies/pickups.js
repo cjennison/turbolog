@@ -70,6 +70,7 @@ ig.module(
 				totalColors: 7,
 				value: 1,
 				hitWater:false,
+				zIndex:9,
 				
 				type: ig.Entity.TYPE.NONE,
 				checkAgainst: ig.Entity.TYPE.A, //I hate baddies
@@ -171,7 +172,7 @@ ig.module(
 				colorOffset: 0,
 				totalColors: 7,
 				value: 1,
-				
+				zIndex:9,
 				type: ig.Entity.TYPE.NONE,
 				checkAgainst: ig.Entity.TYPE.A, //I hate baddies
 				collides: ig.Entity.COLLIDES.PASSIVE,

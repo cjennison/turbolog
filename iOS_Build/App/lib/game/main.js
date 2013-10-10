@@ -15,6 +15,8 @@ ig.module(
 	'game.entities.spike',
 	
 	'game.levels.test',
+	'game.tools.stats',
+
 	'game.screen.end-level',
 	'game.screen.main-menu'
 )
@@ -22,6 +24,7 @@ ig.module(
 .defines(function () {
     "use strict";
     var _c = ig.CONFIG;
+    var _t = ig.TOOLS;
     var buttons = [];
     // we probably want to go ahead and debug while developing
     
@@ -50,7 +53,7 @@ ig.module(
 			
                 this.parent();
                                           
-                                          
+                 _t.loadGame();                   
                 ig.input.bind(ig.KEY.SPACE, 'start');                       
                                           
 				
@@ -66,7 +69,7 @@ ig.module(
                 	
                 }        
                           
-                                                 
+                                         
 				// and lets add some atmosphere!
 				this.camera.addAtmosphere(100, {r:0,g:0,b:0, a:.1});
 				
