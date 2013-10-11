@@ -17,7 +17,7 @@ ig.module(
 	'game.entities.spike',
 	'game.entities.background.IslandBackground',
 	'game.entities.characters.TurboLog',
-	
+	'game.entities.enemies.pickups',
 	'game.entities.enemies.island.bigbirdy',
 	'game.entities.enemies.island.rocketsaw',
 	    'game.entities.ui.healthbar',
@@ -63,6 +63,8 @@ ig.module(
 			var h = this.spawnEntity(EntityHealthBar, 100, 100)
 			console.log(h)
 			this.sortEntitiesDeferred();
+			
+			this.spawnEntity(EntityBombPickup, 400, 100);
 			
 		},
 		

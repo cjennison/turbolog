@@ -234,6 +234,39 @@ ig.module(
 				}
 				
 		});
+		
+		EntityBombPickup = ig.EntityExtended.extend({
+			size:{
+				x:19,
+				y:19
+			},
+			
+			gravityFactor:0,
+			zIndex:100,
+			maxVel: {x:200, y:200},
+			animSheet: new ig.AnimationSheet('media/game_elements/drops/powerup_bomb.png', 19, 19),
+			type: ig.Entity.TYPE.NONE,
+				checkAgainst: ig.Entity.TYPE.A, //I hate baddies
+				collides: ig.Entity.COLLIDES.PASSIVE,
+				
+			init:function(x,y,settings){
+				this.parent(x,y,settings);
+				
+				this.addAnim('idle', 1, [0]);
+				
+			},
+			
+			update:function(){
+				this.currentAnim.angle += .25;
+				this.pos.x -= 1;
+				console.log(this.pos.x);
+				this.parent();
+			}
+			
+			
+			
+			
+		})
 				
 	
 	

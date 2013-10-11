@@ -62,7 +62,7 @@ ig.module(
 	EntityIslandForeground = ig.EntityExtended.extend({
 		performance: _c.KINEMATIC,
 		//Define Animation Sheet and Animation Settings (REQUIRED)
-		animSheet: new ig.AnimationSheet(_c.PATH_TO_MEDIA + 'game_elements/worlds/' + zone + "/levelOne_foregound.png", 4000, 480),
+		animSheet: new ig.AnimationSheet(_c.PATH_TO_MEDIA + 'game_elements/worlds/' + zone + "/levelOne_foregound.png", 4000, 640),
 		animSettings: {
 			idle: {
 				frameTime: 1,
@@ -72,7 +72,7 @@ ig.module(
 			//maxVel:{x:-100, y:0},
 			zIndex:10,
 
-		size: {x:4000, y:480},
+		size: {x:4000, y:640},
 
 		init:function(x,y,settings){
 			this.parent(x,y,settings);
